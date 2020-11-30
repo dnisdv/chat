@@ -1,0 +1,71 @@
+import React from 'react'
+import Avatar from '../Avatar/Avatar'
+import CheckIcon from './assets/check.svg'
+import ReadedIcon from './assets/readed.svg'
+import Time from '../Time/Time'
+import MessageAudio from './MessageAudio/MessageAudio'
+import { MessageWrapper,
+    MessageText,
+    TimeWrapper,
+    AvatarWrapper,
+    MessageBubble,
+    ReadStatus,
+    ReadIcon,
+    AttachmentImage,
+    AttachmentsWrapper,
+    } from './Message.styled'
+
+export type IsMeProps = {
+    isMe? :boolean
+}
+
+export type MessageProps = {
+    children? : string,
+    attachments?: {
+        filename:string,
+        url:string
+    }[],
+    user: {
+        firstName:string,
+        lastName:string,
+        avatar:string,
+    },
+    readed?:boolean,
+    audio?:{
+        audioname:string,
+        url: string
+        },
+} & IsMeProps
+
+
+
+const Message = ({children, user, isMe, readed, attachments, audio}: MessageProps) => {
+    return (
+        <MessageWrapper isMe={isMe}>
+            <AvatarWrapper className="Avatar_Wrapper">
+                <Avatar isOnline srcImage={user.avatar} size={35} user={user} />
+            </AvatarWrapper>
+
+            <MessageBubble attachment={!!(attachments)} isMe={isMe} >
+                {attachments ?<AttachmentsWrapper isText={!!(children)} >{attachments.map( (i) =>  {
+                        return <AttachmentImage isSingle={attachments.length === 1} src={i.url}  />
+                })}</AttachmentsWrapper>
+                : ""}
+
+                {audio ? <MessageAudio AudioUrl={audio.url} /> : children ? <MessageText>{children}</MessageText> : ""}
+    
+                {isMe ? <ReadStatus >
+                    {readed ? <ReadIcon src={ReadedIcon} width="16px" height="10px" /> : <ReadIcon src={CheckIcon} width="11px" height="8px" />}
+                </ReadStatus> : ""}
+            </MessageBubble>
+
+            <TimeWrapper isMe={isMe} >
+                <Time date={Date.parse("2020-11-30T10:27:08.869Z")} />
+            </TimeWrapper>
+        </MessageWrapper>
+    )   
+}
+
+
+
+export default Message
