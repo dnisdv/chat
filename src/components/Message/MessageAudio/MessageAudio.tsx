@@ -24,7 +24,6 @@ const MessageAudio = ({AudioUrl}:MessageAudioProps) => {
     };
 
     const changeCurrentTime = (e:any) =>{
-      console.log(e.target.className)
       if(e.target.className.includes("Control_Wrapper") ||
         e.target.className.includes("Control_Img") || 
         e.target.className.includes("Wave")){

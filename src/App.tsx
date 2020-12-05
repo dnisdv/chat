@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
+import ChatInput from './components/ChatInput/ChatInput';
 import Message from './components/Message/Message'
 
 const userExample = {
@@ -7,10 +8,20 @@ const userExample = {
   avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
 }
 
+
 const App: React.FC = () => {
+
+  const sendHandle = () => {
+
+  }
+  const voiceSend = (blob:Blob) => {
+    console.log(blob)
+  }
+
+
   return (
     <div className="App">
-      <Message 
+      {/* <Message 
         attachments={[
         {
           filename:"Image1",
@@ -59,7 +70,11 @@ const App: React.FC = () => {
         ]}
         isMe
         user={userExample}
-      ></Message>
+      ></Message> */}
+    
+
+        
+      <ChatInput voiceSend={voiceSend} sendHandle={sendHandle} />
     </div>
   );
 }
