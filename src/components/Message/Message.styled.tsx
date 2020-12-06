@@ -72,6 +72,8 @@ export const TimeWrapper = styled.div<IsMeProps>`
     grid-column: ${({isMe}) => isMe ? "1/2" : "2/3"};
     margin:${({isMe}) => isMe ? "0 0 0 auto" : "0 auto 0 0"};
     margin-top:12px;
+    font-size: 13px;    
+    color:rgb(0,0,0,.2);
 `
 export const AttachmentImage = styled.img<AttachmentImageProps>`
     width: 100%;

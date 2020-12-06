@@ -4,13 +4,13 @@ import {AvatarWrapper, AvatarImage, OnlineStatus, AvatarImageWrapper} from './Av
 export type AvatarProps = {
     user:{
         firstName: string,
-        lastName: string
+        lastName: string,
+        avatar:string
     }
     size: number,
-    srcImage:string,
     isOnline?:boolean
 }
-const Avatar = ({size = 50, srcImage, isOnline}: AvatarProps) => {
+const Avatar = ({size = 50, isOnline, user}: AvatarProps) => {
     return(
         <AvatarWrapper>
             <AvatarImageWrapper>
@@ -18,7 +18,7 @@ const Avatar = ({size = 50, srcImage, isOnline}: AvatarProps) => {
                     size={size} 
                     width={size} 
                     height={size} 
-                    src={srcImage} 
+                    src={user.avatar} 
                     alt="user image" />
                     
                 {isOnline ? <OnlineStatus />: ""}

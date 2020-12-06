@@ -2,7 +2,6 @@ import React from 'react'
 import Avatar from '../Avatar/Avatar'
 import CheckIcon from './assets/check.svg'
 import ReadedIcon from './assets/readed.svg'
-import Time from '../Time/Time'
 import MessageAudio from './MessageAudio/MessageAudio'
 import { MessageWrapper,
     MessageText,
@@ -14,6 +13,8 @@ import { MessageWrapper,
     AttachmentImage,
     AttachmentsWrapper,
     } from './Message.styled'
+import { formatDistance } from 'date-fns'
+import { enUS } from 'date-fns/locale'
 
 export type IsMeProps = {
     isMe? :boolean
@@ -43,7 +44,7 @@ const Message = ({children, user, isMe, readed, attachments, audio}: MessageProp
     return (
         <MessageWrapper isMe={isMe}>
             <AvatarWrapper className="Avatar_Wrapper">
-                <Avatar isOnline srcImage={user.avatar} size={35} user={user} />
+                <Avatar isOnline size={35} user={user} />
             </AvatarWrapper>
 
             <MessageBubble attachment={!!(attachments)} isMe={isMe} >
@@ -60,7 +61,7 @@ const Message = ({children, user, isMe, readed, attachments, audio}: MessageProp
             </MessageBubble>
 
             <TimeWrapper isMe={isMe} >
-                <Time date={Date.parse("2020-11-30T10:27:08.869Z")} />
+                {formatDistance(new Date(), new Date(), { addSuffix: true, locale: enUS })}
             </TimeWrapper>
         </MessageWrapper>
     )   
