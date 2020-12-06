@@ -1,5 +1,6 @@
 import React from 'react';
 import Dialog from './components/Dialog/Dialog';
+import Search from './components/Search/Search';
 
 const userExample = {
   firstName: "Dwight ",
@@ -17,9 +18,14 @@ const roomExample = {
 }
 
 const App: React.FC = () => {
+
+  const changeSearchInput = (value:string) =>{
+    console.log(value)
+  } 
   return (
     <div className="App">
-      <Dialog active={false} room={roomExample} />
+      {/* <Dialog active={false} room={roomExample} /> */}
+      <Search onChange={changeSearchInput} />
     </div>
   );
 }
