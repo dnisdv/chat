@@ -4,6 +4,14 @@ import Avatar from '../Avatar/Avatar'
 import { getHours, getMinutes, formatDistanceStrict, isToday } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 
+const formateDate = (date:number | string | Date) => {
+    if(isToday(+date)){
+        // n < 10 ? "add 0 in face" : n
+        return (getHours(+date) < 10 ? "0" + getHours(+date) : getHours(+date)) + " : " + (getMinutes(+date) < 10 ? "0" + getMinutes(+date) : getMinutes(+date))
+    }else{
+        return formatDistanceStrict(+date, new Date(), { addSuffix: true, locale: enUS })
+    }
+}
 
 export type DialogProps = {
     room:{
@@ -21,17 +29,7 @@ export type DialogProps = {
     active:boolean,
 }
 
-
 const Dialog  = ({room, active}: DialogProps) => {
-
-    const formateDate = (date:any) => {
-        if(isToday(date)){
-            return (getHours(date) < 10 ? "0" + getHours(date) : getHours(date)) + " : " + (getMinutes(date) < 10 ? "0" + getMinutes(date) : getMinutes(date))
-        }else{
-            return formatDistanceStrict(date, new Date(), { addSuffix: true, locale: enUS })
-        }
-    }
-    
     return(
         <Wrapper active={active}>
             <Avatar size={60} user={room.partner}></Avatar>

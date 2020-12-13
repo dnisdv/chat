@@ -2,7 +2,7 @@ import React from 'react'
 import Avatar from '../Avatar/Avatar'
 import CheckIcon from './assets/check.svg'
 import ReadedIcon from './assets/readed.svg'
-import MessageAudio from './MessageAudio/MessageAudio'
+import MessageAudio from './MessageAudio/MessageAudio.container'
 import { MessageWrapper,
     MessageText,
     TimeWrapper,

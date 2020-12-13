@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React from 'react'
 import {InputText,
      Wrapper,
     EmojiImg,
@@ -25,149 +25,57 @@ import EmojiIcon from './Assets/Emoji.svg'
 import SendIcon from './Assets/Send.svg'
 import AttachmentIcon from './Assets/Attachment.svg'
 import DeleteIcon from './Assets/remove.svg'
-import { Picker, BaseEmoji } from 'emoji-mart'
+import { Picker } from 'emoji-mart'
 import Recorder from './Recorder/Recorder'
+import {EventTargetFiles} from './ChatInput.container'
+
+export type AttachmentImagesType = {
+    id:number,
+    name:string,
+    url:string,
+    file:File
+}
 
 export type ChatInputProps = {
+    AttachmentImages: AttachmentImagesType[],
+    deleteAttachment: (i:AttachmentImagesType) => void,
+    isRecording:boolean,
     sendHandle: () => void,
-    voiceSend: (blob:Blob) => void
-}
-
-type EventTargetFiles = React.ChangeEvent<HTMLInputElement> & {
-    target:{
-        files:[FileList]
-    }
-}
-
-const PickerStyle = {
-    width:338,
-    height:426
+    voiceSend: (blob:Blob) => void,
+    recordingPassedTime:() => string,
+    autoResize:(e:React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>) => void,
+    changeInputValue:(e:React.ChangeEvent<HTMLTextAreaElement>) => void,
+    toogleEmojiOpen:() => void,
+    EmojiStatus:boolean,
+    onSend:() => void,
+    uploadAttachmentHandle:(e:EventTargetFiles) => void,
+    selectEmoji:(data:any) => void,
+    inputValue:string,
+    onRecord:(blob:Blob) => void,
+    PassedTimeFormat:() => string,
+    setisRecording:React.Dispatch<React.SetStateAction<boolean>>,
+    setpassedTime:React.Dispatch<React.SetStateAction<number>>,
+    textAreaRef:React.MutableRefObject<HTMLTextAreaElement | null>
 }
 
 const ChatInput = ({
-    sendHandle,
-    voiceSend
+    AttachmentImages,
+    deleteAttachment,
+    isRecording,
+    recordingPassedTime,
+    autoResize,
+    changeInputValue,
+    toogleEmojiOpen,
+    EmojiStatus,
+    onSend,
+    uploadAttachmentHandle,
+    selectEmoji,
+    inputValue,
+    onRecord,
+    setisRecording,
+    setpassedTime,
+    textAreaRef
 }:ChatInputProps) => {
-    type pickerPositionType = {
-        top?: string,
-        bottom?: string,
-        left?: string,
-        right?: string
-    }
-
-    type AttachmentImagesType = {
-        id:number,
-        name:string,
-        url:string,
-        file:File
-    }
-
-    const [EmojiStatus, setEmojiStatus] = useState<boolean>(false)
-    const [PickerPosition, setPickerPosition] = useState<pickerPositionType>({})
-    const EmojiRef = useRef<any>()
-    const [InputValue, setInputValue] = useState<string>("")
-    const [isRecording, setisRecording] = useState<boolean>(false)
-    const [AttachmentImages, setAttachmentImages] = useState<AttachmentImagesType[]>([])
-    const [passedTime, setpassedTime] = useState<number>(0)
-
-    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
-
-    useEffect(() => {
-        const pickerwidth = PickerStyle.width
-        const pickerheight = PickerStyle.height
-        const Position = EmojiRef.current.getBoundingClientRect()
-
-        let pickerposition:pickerPositionType = {}
-
-        if(Position.left > window.innerWidth - pickerwidth){
-            pickerposition.right = 0 + "px"
-        }else{
-            pickerposition.left = 0 + "px"
-        }
-        if(Position.top > window.innerHeight - pickerheight){
-            pickerposition.bottom = 40 + "px"
-        }else{
-            pickerposition.top = 40 + "px"
-        }
-        setPickerPosition(pickerposition)
-    }, [])
-
-    const selectEmoji = (e:BaseEmoji) => {
-        if(textAreaRef.current){
-            setInputValue(InputValue + e.colons)
-            textAreaRef.current.style.height = '55px';
-            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
-        }
-    }
-
-    const toogleEmojiOpen = () => {
-        setEmojiStatus(!EmojiStatus)
-    }
-
-    const changeInputValue = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
-        setInputValue(e.target.value)
-        autoResize(e)
-    }
-
-    const onRecord = (blob:Blob) => {
-        voiceSend(blob)
-    }
-
-    const uploadAttachmentHandle = (e:EventTargetFiles) => {
-        if (e.target.files && e.target.files[0]) {
-            const files = [...e.target.files]
-            if(
-                files.length > 12 ||
-                AttachmentImages.length + files.length > 12){
-                //TODO RETURN ERROR
-                return
-            }
-            setPreviewAttachment(files)  
-          }
-    }
-
-    const setPreviewAttachment = (files:File[]) => {
-        for (let i = 0; i < files.length ; i++){
-            var reader = new FileReader();
-
-            reader.onload = function(e:any) {
-                setAttachmentImages((oldState:AttachmentImagesType[]) => [...oldState, {
-                    id: oldState.length >= 1 ? Math.max(...oldState.map((i:any) => i.id)) + 1 : 1,
-                    name: files[i].name,
-                    url: e.target.result,
-                    file: files[i]
-                }])
-              }
-            reader.readAsDataURL(files[i])
-        }
-    }
-
-    const deleteAttachment = ({id}:AttachmentImagesType) => {
-        setAttachmentImages((prevProps:AttachmentImagesType[]) => prevProps.filter( (i:AttachmentImagesType) => i.id !== id))
-    }
-
-    const onSend = () => {
-        console.log("SEND")
-        sendHandle()
-        //TODO ADD SEND FUNCTIONALITY
-    }
-
-    function PassedTimeFormat()  {
-        var sec_num:number = parseInt(passedTime.toString(), 10);
-        var minutes:string | number = Math.floor((sec_num) / 60);
-        var seconds:number | string = sec_num - (minutes * 60);
-    
-        if (minutes < 10) {minutes = "0"+minutes;}
-        if (seconds < 10) {seconds = "0"+seconds;}
-
-        return +minutes+':'+seconds;
-    }
-
-    const autoResize = (e:React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-        e.currentTarget.style.height = '55px';
-        e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px';
-    }
-
     return (
         <>
         <PreviewsAttach>
@@ -185,25 +93,24 @@ const ChatInput = ({
                 <LeftColumn>
                     {isRecording ? 
                         <RecordingWrapper>
-                            <RecordingTime>{PassedTimeFormat()}</RecordingTime>
+                            <RecordingTime>{recordingPassedTime()}</RecordingTime>
                             <RecordingIcon />
                             <RecordTitle>Recording...</RecordTitle>
                         </RecordingWrapper> : ""}
-                        <InputText ref={textAreaRef} onKeyDown={autoResize} onChange={changeInputValue} value={isRecording ? "" : InputValue} placeholder={isRecording ? "" :"Type your message"}></InputText>
+                        <InputText ref={textAreaRef} onKeyDown={autoResize} onChange={changeInputValue} value={isRecording ? "" : inputValue} placeholder={isRecording ? "" :"Type your message"}></InputText>
                 </LeftColumn>
                 <Controls>
                     <Recorder setpassedTime={setpassedTime} setisRecording={setisRecording} isRecording={isRecording} succesRecord={onRecord} />
 
                     <EmojiControl >
-                        <EmojiImg ref={EmojiRef} onClick={toogleEmojiOpen} src={EmojiIcon}  />
+                        <EmojiImg onClick={toogleEmojiOpen} src={EmojiIcon}  />
                         {EmojiStatus ? 
                                 <Picker set='apple'
                                 onClick={selectEmoji}
                                 style={{ 
-                                    ...PickerPosition,
                                     position: 'absolute',
-                                    width:PickerStyle.width + "px",
-                                    height:PickerStyle.height + "px",
+                                    bottom:"100%",
+                                    right:0,
                                 }}  />
                             : ""}
                     </EmojiControl>

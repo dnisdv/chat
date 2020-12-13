@@ -16,7 +16,7 @@ const Recorder = ({
     isRecording,
     setpassedTime
     }: RecorderProps) => {
-        const [mediaRecorder, setmediaRecorder] = useState<any>()
+        const [mediaRecorder, setmediaRecorder] = useState<MediaRecorder | null>()
         let timePassing:number 
 
         const handleSuccess = (strem:MediaStream, event:React.MouseEvent<HTMLDivElement>) => {
@@ -33,7 +33,7 @@ const Recorder = ({
                     setmediaRecorder(mediaRecorder)
                     
                     timePassing = setInterval( () => {
-                        setpassedTime((prevState:any) => prevState + 1 )
+                        setpassedTime((prevState:number) => prevState + 1 )
                     }, 1000)
         
                     mediaRecorder.addEventListener("dataavailable", (e:any) => {

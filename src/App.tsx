@@ -1,6 +1,18 @@
 import React from 'react';
 import Dialog from './components/Dialog/Dialog';
 import Search from './components/Search/Search';
+import LoginForm from './Forms/Auth/LoginForm/LoginForm';
+import AuthPage from './Pages/Auth/Auth'
+import ChatInput from './components/ChatInput/ChatInput.container'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Message from './components/Message/Message'
+
+
 
 const userExample = {
   firstName: "Dwight ",
@@ -23,10 +35,14 @@ const App: React.FC = () => {
     console.log(value)
   } 
   return (
-    <div className="App">
-      {/* <Dialog active={false} room={roomExample} /> */}
-      <Search onChange={changeSearchInput} />
-    </div>
+    <Router>
+      <div className="App">
+        {/* <Dialog active={false} room={roomExample} /> */}
+        {/* <Search onChange={changeSearchInput} /> */}
+
+        {/* <Route path={["/signin", "/signup", "/forget"]} exact render={() => <AuthPage />} /> */}
+      </div>
+    </Router>
   );
 }
 
