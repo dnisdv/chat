@@ -1,6 +1,10 @@
 import styled, {keyframes} from 'styled-components'
 
 export const Wrapper = styled.div`
+    margin:34px;
+
+`
+export const ChatWrapper = styled.div`
     background-color:white;
     min-height:55px;
     display:flex;
@@ -19,6 +23,9 @@ export const InputText = styled.textarea`
     max-height:250px;
     resize:none;
     font-family:inherit;
+    &:focus-visible{
+        outline:none;
+    }
 `
 
 export const EmojiImg = styled.img`

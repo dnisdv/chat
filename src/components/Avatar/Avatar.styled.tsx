@@ -14,6 +14,7 @@ export const AvatarImage = styled.img<AvatarImageProps>`
     height:${({size}) => size + "px" };
     object-fit: cover;
     border-radius:50%;
+    display:block;
 `
 
 export const OnlineStatus = styled.div`

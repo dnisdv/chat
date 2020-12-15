@@ -5,20 +5,21 @@ export type AvatarProps = {
     user:{
         firstName: string,
         lastName: string,
-        avatar:string
-    }
+    },
+    srcImage:string
     size: number,
     isOnline?:boolean
 }
-const Avatar = ({size = 50, isOnline, user}: AvatarProps) => {
+const Avatar = ({size = 50, isOnline, user, srcImage}: AvatarProps) => {
     return(
+        
         <AvatarWrapper>
             <AvatarImageWrapper>
                 <AvatarImage 
                     size={size} 
                     width={size} 
                     height={size} 
-                    src={user.avatar} 
+                    src={srcImage} 
                     alt="user image" />
                     
                 {isOnline ? <OnlineStatus />: ""}

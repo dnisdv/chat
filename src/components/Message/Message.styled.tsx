@@ -17,7 +17,7 @@ type AttachmentWrapperProps = {
 
 export const MessageWrapper = styled.div<MessageWrapperProps>`
     display: grid;
-    grid-template-columns: ${({isMe}) => isMe ? "auto auto" : "auto auto" };
+    grid-template-columns: ${({isMe}) => isMe ? "auto auto auto" : "auto auto" };
     grid-template-rows: auto auto;
     grid-column-gap: 10px;
     grid-template-areas: ${({isMe}) => isMe ?   '"message avatar"' : '"avatar message"' } ;
@@ -39,10 +39,10 @@ export const MessageText = styled.span`
 export const AvatarWrapper = styled.div`
     margin-top:auto;
     grid-area:avatar;
-    display:none;
-    @media (min-width: 560px) {
-        display:block;
-    }
+    // display:none;
+    // @media (min-width: 560px) {
+    //     display:block;
+    // }
 `
 
 export const MessageBubble = styled.div<MessageBubbleProps>`
@@ -55,6 +55,7 @@ export const MessageBubble = styled.div<MessageBubbleProps>`
     max-width:600px;
     width:100%;
     background-color:${({isMe}) => isMe ? "#E4EDFF" : "white" };
+    align-items:flex-start;
 `
 
 export const ReadStatus = styled.div<IsMeProps>`
@@ -69,7 +70,7 @@ export const ReadIcon = styled.img`
     display:block;
 `
 export const TimeWrapper = styled.div<IsMeProps>`
-    grid-column: ${({isMe}) => isMe ? "1/2" : "2/3"};
+    grid-column: ${({isMe}) => isMe ? "1/2" : "2/4"};
     margin:${({isMe}) => isMe ? "0 0 0 auto" : "0 auto 0 0"};
     margin-top:12px;
     font-size: 13px;    
@@ -91,4 +92,5 @@ export const AttachmentImage = styled.img<AttachmentImageProps>`
 export const AttachmentsWrapper = styled.div<AttachmentWrapperProps>`
     display:flex;   
     flex-wrap:wrap;
+    width:100%;
 `

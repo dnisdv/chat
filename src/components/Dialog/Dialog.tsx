@@ -14,35 +14,33 @@ const formateDate = (date:number | string | Date) => {
 }
 
 export type DialogProps = {
-    room:{
-        partner:{
-            firstName: string,
-            lastName: string,
-            avatar:string
-        }
-        lastMessage:{
-            message:string,
-            date:Date
-        },
-        notReadedCount:number
+    user:{
+        firstName: string,
+        lastName: string,
+        avatar:string
     }
+    lastMessage:{
+        message:string,
+        date:Date
+    },
+    notReadedCount:number
     active:boolean,
 }
 
-const Dialog  = ({room, active}: DialogProps) => {
+const Dialog  = ({user, lastMessage, notReadedCount, active}: DialogProps) => {
     return(
         <Wrapper active={active}>
-            <Avatar size={60} user={room.partner}></Avatar>
+            <Avatar size={60} srcImage={user.avatar} user={user}></Avatar>
             <DialogData>
                 <Box>
-                    <FullName>{room.partner.firstName + room.partner.lastName}</FullName>
+                    <FullName>{user.firstName + user.lastName}</FullName>
                     <TimeWrapper>
-                        {formateDate(room.lastMessage.date)}
+                        {formateDate(lastMessage.date)}
                     </TimeWrapper>
                 </Box>
                 <LastMessageWrapper>
-                    <LastMessage>{room.lastMessage.message}</LastMessage>
-                    <NotReaded>{room.notReadedCount}</NotReaded>
+                    <LastMessage>{lastMessage.message}</LastMessage>
+                    {notReadedCount ? <NotReaded>{notReadedCount}</NotReaded> : "" }
                 </LastMessageWrapper>
             </DialogData>
         </Wrapper>

@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <Route path={["/signin", "/signup", "/forget"]} exact render={() => <AuthPage />} />
-        <Route path="/" render={() => <Home />} /> 
+        <Route path="/" exact render={() => <Home />} /> 
       </div>
     </Router>
   );

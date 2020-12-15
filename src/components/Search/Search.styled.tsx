@@ -12,6 +12,10 @@ export const SearchInput = styled.input`
     border:none;
     border-radius: 4px;
     padding:0px 19px 0px 19px;
+    background-color:#F9F9F9;
+    &:focus-visible{
+        outline:none;
+    }
 `
 
 const Fade = keyframes`

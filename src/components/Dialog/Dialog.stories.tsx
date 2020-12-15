@@ -15,9 +15,9 @@ const userExample = {
   
 const roomExample = {
     partner:userExample,
-    lastMessage:{
-    message:"Agreed joy vanity regret met may ladies oppose who",
-    date:new Date()
+      lastMessage:{
+      message:"Agreed joy vanity regret met may ladies oppose who",
+      date:new Date()
     },
     notReadedCount:2,
 }
@@ -27,6 +27,11 @@ const Template: Story<DialogProps> = (args) => <Dialog {...args} ></Dialog>;
 export const Base = Template.bind({});
 Base.args = {
     active:false,
-    room:roomExample
+    user:userExample,
+    lastMessage:{
+      message:"Hello From last message :)",
+      date:new Date()
+    },
+    notReadedCount:1,
 };
 

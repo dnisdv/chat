@@ -21,7 +21,7 @@ export type IsMeProps = {
 }
 
 export type MessageProps = {
-    children? : string,
+    text? : string,
     attachments?: {
         filename:string,
         url:string
@@ -40,20 +40,20 @@ export type MessageProps = {
 
 
 
-const Message = ({children, user, isMe, readed, attachments, audio}: MessageProps) => {
+const Message = ({text, user, isMe, readed, attachments, audio}: MessageProps) => {
     return (
         <MessageWrapper isMe={isMe}>
             <AvatarWrapper className="Avatar_Wrapper">
-                <Avatar isOnline size={35} user={user} />
+                <Avatar isOnline size={35} srcImage={user.avatar} user={user} />
             </AvatarWrapper>
 
             <MessageBubble attachment={!!(attachments)} isMe={isMe} >
-                {attachments ?<AttachmentsWrapper isText={!!(children)} >{attachments.map( (i) =>  {
+                {attachments ?<AttachmentsWrapper isText={!!(text)} >{attachments.map( (i) =>  {
                         return <AttachmentImage isSingle={attachments.length === 1} src={i.url}  />
                 })}</AttachmentsWrapper>
                 : ""}
 
-                {audio ? <MessageAudio AudioUrl={audio.url} /> : children ? <MessageText>{children}</MessageText> : ""}
+                {audio ? <MessageAudio AudioUrl={audio.url} /> : text ? <MessageText>{text}</MessageText> : ""}
     
                 {isMe ? <ReadStatus >
                     {readed ? <ReadIcon src={ReadedIcon} width="16px" height="10px" /> : <ReadIcon src={CheckIcon} width="11px" height="8px" />}

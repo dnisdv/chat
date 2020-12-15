@@ -18,7 +18,7 @@ export default {
 }
 } as Meta;
 
-const Template: Story<MessageProps> = (args) => <Message {...args} >{args.children}</Message>;
+const Template: Story<MessageProps> = (args) => <Message {...args} />;
 
 export const Base = Template.bind({});
 Base.args = {
@@ -29,7 +29,7 @@ Base.args = {
       avatar:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
   },
   readed:false,
-  children:"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born",
+  text:"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born",
 };
 
 
@@ -50,7 +50,7 @@ Audio.args = {
 
 export const Attachments = Template.bind({});
 Attachments.args = {
-  children:"",
+  text:"",
   isMe : true,
   user: {
     firstName: "Dwight ",
@@ -100,7 +100,7 @@ Attachment.args = {
 
 export const AttachemntWithText = Template.bind({});
 AttachemntWithText.args = {
-  children:"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born.",
+  text:"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born.",
   isMe : true,
   user: {
     firstName: "Dwight ",

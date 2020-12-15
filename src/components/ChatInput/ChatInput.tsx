@@ -1,6 +1,7 @@
 import React from 'react'
 import {InputText,
-     Wrapper,
+    Wrapper,
+    ChatWrapper,
     EmojiImg,
     SendButton,
     EmojiControl,
@@ -77,7 +78,7 @@ const ChatInput = ({
     textAreaRef
 }:ChatInputProps) => {
     return (
-        <>
+        <Wrapper>
         <PreviewsAttach>
             {AttachmentImages ? AttachmentImages.map( (i:AttachmentImagesType) => {
                 return (
@@ -89,7 +90,7 @@ const ChatInput = ({
             }): ""}
         </PreviewsAttach>
 
-        <Wrapper>
+        <ChatWrapper>
                 <LeftColumn>
                     {isRecording ? 
                         <RecordingWrapper>
@@ -124,8 +125,8 @@ const ChatInput = ({
                         <img src={SendIcon} />
                     </SendButton>
                 </Controls>
+        </ChatWrapper>
         </Wrapper>
-        </>
     )
 }
 
