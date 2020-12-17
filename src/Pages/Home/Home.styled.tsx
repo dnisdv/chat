@@ -10,7 +10,10 @@ export const Wrapper = styled.div`
 export const SideMenu = styled.div`
     padding-top:33px;
     width:374px;
-
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
 `
 export const MessagesWrapper = styled.div`
     height:100%;

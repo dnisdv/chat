@@ -19,11 +19,11 @@ export const MessageWrapper = styled.div<MessageWrapperProps>`
     display: grid;
     grid-template-columns: ${({isMe}) => isMe ? "auto auto auto" : "auto auto" };
     grid-template-rows: auto auto;
-    grid-column-gap: 10px;
     grid-template-areas: ${({isMe}) => isMe ?   '"message avatar"' : '"avatar message"' } ;
     justify-content: ${({isMe}) => isMe ? "end" : "start"};
     max-width:80%;
     ${({isMe}) => isMe ? "margin-left:auto" : ""};
+    padding: 0px 34px;
 }
 `
 
@@ -33,16 +33,13 @@ export const MessageText = styled.span`
     font-size:14px;
     @media (min-width: 560px) {
         font-size:16px;
-    }
+    };
 `
 
-export const AvatarWrapper = styled.div`
+export const AvatarWrapper = styled.div<IsMeProps>`
     margin-top:auto;
     grid-area:avatar;
-    // display:none;
-    // @media (min-width: 560px) {
-    //     display:block;
-    // }
+    ${({isMe}) => isMe ? "margin-left:10px": "margin-right:10px" };
 `
 
 export const MessageBubble = styled.div<MessageBubbleProps>`

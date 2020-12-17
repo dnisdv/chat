@@ -5,6 +5,8 @@ import Messages from '../../components/Messages/Messages.container'
 import Search from '../../components/Search/Search.container'
 import ChatInput from '../../components/ChatInput/ChatInput.container'
 
+import Interlocutor from '../../components/Interlocutor/Interlocutor.container'
+
 const userExample = {
     firstName: "Dwight ",
     lastName: "Schrute",
@@ -84,6 +86,7 @@ const Home = () => {
             </SideMenu>
 
             <MessagesMenu>
+                <Interlocutor />
                 <Messages />
                 <ChatInput />
             </MessagesMenu>

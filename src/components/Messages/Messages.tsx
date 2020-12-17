@@ -1,6 +1,8 @@
 import React from 'react'
 import Message, {MessageProps} from '../Message/Message'
 import NoItemsIcon from './Assets/MailBox.svg' 
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import {
     Wrapper,
     MessageWrapper,
@@ -20,8 +22,8 @@ const Messages = ({items, loading=false}: MessagesProps) => {
         <Wrapper>
             {loading ? "" :
                 items && items.length > 0 ? 
-                items.map( (i:any) => {
-                    console.log(items)
+                <PerfectScrollbar>
+                {items.map( (i:any) => {
                     return(
                         <MessageWrapper>
                             <Message
@@ -33,7 +35,8 @@ const Messages = ({items, loading=false}: MessagesProps) => {
                             />
                         </MessageWrapper>
                     )
-                })
+                })}
+                </PerfectScrollbar>
             :
             <NoItemsWrapper>
                 <NoItemsFeedbackImage src={NoItemsIcon} />

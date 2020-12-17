@@ -21,7 +21,117 @@ const Dialogs = () => {
         <DialogsComponent 
             items={[
             {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
                 active:true,
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+                notReadedCount:2
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+                notReadedCount:2
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+                notReadedCount:2
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+                notReadedCount:2
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+            },
+            {
+                user:userExample,
+                lastMessage:{
+                    message:"Agreed joy vanity regret met may ladies oppose who",
+                    date:new Date()
+                },
+                notReadedCount:2
+            },
+            {
                 user:userExample,
                 lastMessage:{
                     message:"Agreed joy vanity regret met may ladies oppose who",

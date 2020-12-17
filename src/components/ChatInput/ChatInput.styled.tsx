@@ -1,8 +1,7 @@
 import styled, {keyframes} from 'styled-components'
 
 export const Wrapper = styled.div`
-    margin:34px;
-
+    padding:24px 34px;
 `
 export const ChatWrapper = styled.div`
     background-color:white;
@@ -82,7 +81,7 @@ export const RecordingWrapper = styled.div`
     align-items:center;
     position:absolute;
     bottom:0px;
-    
+    z-index:99;
 `
 const moveInLeft = keyframes`
     0%{

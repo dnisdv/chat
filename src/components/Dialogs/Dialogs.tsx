@@ -2,6 +2,8 @@ import React from 'react'
 import Dialog from '../Dialog/Dialog.container'
 import emptyBoxIcon from './Assets/empty-box.svg'
 import ContentLoader from 'react-content-loader'
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import {
     Wrapper,
     DialogWrapper,
@@ -53,7 +55,8 @@ const Dialogs = ({items, loading=false}:DialogsProps) => {
                     })}
                 </LoadingWrapper>
              : items && items.length > 0 ? 
-                items.map((i:any) => {
+                <PerfectScrollbar>
+                {items.map((i:any) => {
                     return(
                         <DialogWrapper>
                             <Dialog 
@@ -64,7 +67,9 @@ const Dialogs = ({items, loading=false}:DialogsProps) => {
                             />
                         </DialogWrapper>
                     )
-                }):
+                })}
+                </PerfectScrollbar>
+                :
                 <NoDialogsWrapper>
                     <NoDialogImg src={emptyBoxIcon }/>
                     <NoDialogsTitle>Add new friends</NoDialogsTitle>

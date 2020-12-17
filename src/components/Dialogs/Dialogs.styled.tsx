@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const Wrapper = styled.div`
     box-sizing:border-box;  
     margin-top:20px;
+    overflow:hidden;
 `
 export const DialogWrapper = styled.div`
 

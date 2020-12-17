@@ -29,6 +29,8 @@ import DeleteIcon from './Assets/remove.svg'
 import { Picker } from 'emoji-mart'
 import Recorder from './Recorder/Recorder'
 import {EventTargetFiles} from './ChatInput.container'
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 export type AttachmentImagesType = {
     id:number,
@@ -98,7 +100,9 @@ const ChatInput = ({
                             <RecordingIcon />
                             <RecordTitle>Recording...</RecordTitle>
                         </RecordingWrapper> : ""}
-                        <InputText ref={textAreaRef} onKeyDown={autoResize} onChange={changeInputValue} value={isRecording ? "" : inputValue} placeholder={isRecording ? "" :"Type your message"}></InputText>
+                        <PerfectScrollbar>
+                            <InputText ref={textAreaRef} onKeyDown={autoResize} onChange={changeInputValue} value={isRecording ? "" : inputValue} placeholder={isRecording ? "" :"Type your message"}></InputText>
+                        </PerfectScrollbar>
                 </LeftColumn>
                 <Controls>
                     <Recorder setpassedTime={setpassedTime} setisRecording={setisRecording} isRecording={isRecording} succesRecord={onRecord} />

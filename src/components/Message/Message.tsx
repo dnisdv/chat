@@ -43,7 +43,7 @@ export type MessageProps = {
 const Message = ({text, user, isMe, readed, attachments, audio}: MessageProps) => {
     return (
         <MessageWrapper isMe={isMe}>
-            <AvatarWrapper className="Avatar_Wrapper">
+            <AvatarWrapper isMe={isMe} className="Avatar_Wrapper">
                 <Avatar isOnline size={35} srcImage={user.avatar} user={user} />
             </AvatarWrapper>
 

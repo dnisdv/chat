@@ -13,6 +13,7 @@ const Search = ({onChange}: SearchContainerProps) => {
     const changeValue = (e:React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
         onChange && onChange(e.target.value)
+        console.log("SEARCH FOR USERS")
     }
 
     const clearSearchValue = () => {
