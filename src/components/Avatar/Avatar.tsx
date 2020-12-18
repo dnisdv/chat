@@ -2,15 +2,11 @@ import React from 'react'
 import {AvatarWrapper, AvatarImage, OnlineStatus, AvatarImageWrapper} from './Avatar.styled'
 
 export type AvatarProps = {
-    user:{
-        firstName: string,
-        lastName: string,
-    },
     srcImage:string
     size: number,
     isOnline?:boolean
 }
-const Avatar = ({size = 50, isOnline, user, srcImage}: AvatarProps) => {
+const Avatar = ({size = 50, isOnline, srcImage}: AvatarProps) => {
     return(
         
         <AvatarWrapper>

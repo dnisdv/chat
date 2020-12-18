@@ -30,7 +30,7 @@ export type DialogProps = {
 const Dialog  = ({user, lastMessage, notReadedCount, active}: DialogProps) => {
     return(
         <Wrapper active={active}>
-            <Avatar size={60} srcImage={user.avatar} user={user}></Avatar>
+            <Avatar size={60} srcImage={user.avatar}></Avatar>
             <DialogData>
                 <Box>
                     <FullName>{user.firstName + user.lastName}</FullName>

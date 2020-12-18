@@ -12,7 +12,7 @@ import {
     MenuImgWrapper
  } from './Interlocutor.styled'
 
-type InterlocutorProps = {
+export type InterlocutorProps = {
     toggleMenu: () => void,
     isMenuOpen:boolean,
     clearHistory: (e:React.MouseEvent<HTMLLIElement>) => void,
@@ -39,7 +39,6 @@ const Interlocutor = ({
             <RightSide>
                 <Avatar
                         size={50}
-                        user={user} 
                         srcImage={user.avatar} />
                 <Menu>
                     <MenuImgWrapper onClick={toggleMenu} >

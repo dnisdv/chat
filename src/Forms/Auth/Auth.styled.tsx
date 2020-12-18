@@ -49,12 +49,12 @@ export const FormInput = styled.input`
     background:inherit;
     border-bottom: 1px solid #B557FF;
     background:inherit;
+    user-select: none;
     &:not([value=""]) ~ ${FormInputLabel}{
         top:0%;
         transition:.05s;
         font-size:12px;
         padding-left:0px;
-
     }
     &:focus + ${FormInputLabel}{
         top:0px;

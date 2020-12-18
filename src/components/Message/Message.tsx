@@ -44,7 +44,7 @@ const Message = ({text, user, isMe, readed, attachments, audio}: MessageProps) =
     return (
         <MessageWrapper isMe={isMe}>
             <AvatarWrapper isMe={isMe} className="Avatar_Wrapper">
-                <Avatar isOnline size={35} srcImage={user.avatar} user={user} />
+                <Avatar isOnline size={35} srcImage={user.avatar} />
             </AvatarWrapper>
 
             <MessageBubble attachment={!!(attachments)} isMe={isMe} >

@@ -18,12 +18,14 @@ const SignupSchema = yup.object().shape({
   username: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
 });
 
 const RegisterForm = () => {
     return(
         <Formik
-          initialValues={{ username:'', email: '', password: '' }}
+          initialValues={{ firstName:"", lastName:"", username:'', email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -45,6 +47,33 @@ const RegisterForm = () => {
             <Title>Sign up</Title>
             <SwitchParagraph>or <Link to="/signin">Sign in</Link></SwitchParagraph>
             <Form onSubmit={handleSubmit}>
+
+              <FormInputWrapper>
+                    <FormInput
+                        type="text"
+                        name="firstName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.firstName}
+                        id="registerformfirstName"
+                    />
+                    <FormInputLabel htmlFor="registerformfirstName">First name</FormInputLabel>
+                    {errors.firstName && touched.firstName && <ErrorFeedback>{errors.firstName}</ErrorFeedback>}
+                </FormInputWrapper>
+
+                <FormInputWrapper>
+                    <FormInput
+                        type="text"
+                        name="lastName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.lastName}
+                        id="registerformlastName"
+                    />
+                    <FormInputLabel htmlFor="registerformlastName">Last name</FormInputLabel>
+                    {errors.lastName && touched.lastName && <ErrorFeedback>{errors.lastName}</ErrorFeedback>}
+                </FormInputWrapper>
+
                 <FormInputWrapper>
                     <FormInput
                         type="text"

@@ -4,7 +4,7 @@ import Dialogs from '../../components/Dialogs/Dialogs.container'
 import Messages from '../../components/Messages/Messages.container'
 import Search from '../../components/Search/Search.container'
 import ChatInput from '../../components/ChatInput/ChatInput.container'
-
+import Profile from '../../components/Profile/Profile.container'
 import Interlocutor from '../../components/Interlocutor/Interlocutor.container'
 
 const userExample = {
@@ -81,6 +81,7 @@ const Home = () => {
     return(
         <Wrapper>
             <SideMenu>
+                <Profile />
                 <Search />
                 <Dialogs />
             </SideMenu>
