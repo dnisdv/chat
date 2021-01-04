@@ -13,21 +13,34 @@ import {
     NoDialogsDescription,
     LoadingWrapper,
 } from './Dialogs.styled'
+import { Dialog as DialogType } from '../../redux/dialogs/types'
 
 type DialogsProps = {
-    items?:{
+    items:{
+        dialog:DialogType,
         active?:boolean,
         user:{
-            firstName:string,
-            lastName:string,
-            avatar:string
+            _id:string,
+            firstname:string,
+            lastname:string,
+            avatar:string,
+            username:string
         },
         lastMessage:{
             message:string,
-            date:Date
-        }
-        notReadedCount?:number
-    }[],
+            date:string
+            fromMe:boolean,
+            audio?:{
+                filename:string,
+                path:string,
+            },
+            attachments?:{
+                filename:string,
+                path:string
+            }[]
+        } | null,
+        notReadedCount?:number | null
+    }[] | null,
     loading?:boolean,
 }
 
@@ -56,14 +69,14 @@ const Dialogs = ({items, loading=false}:DialogsProps) => {
                 </LoadingWrapper>
              : items && items.length > 0 ? 
                 <PerfectScrollbar>
-                {items.map((i:any) => {
+                {items.map((i) => {
                     return(
-                        <DialogWrapper>
+                        <DialogWrapper key={i.user._id}>
                             <Dialog 
-                                active={i.active}
+                                dialog={i.dialog}
                                 user={i.user}
                                 lastMessage={i.lastMessage}
-                                notReadedCount={i.notReadedCount}
+                                notReadedCount={i.notReadedCount || 0}
                             />
                         </DialogWrapper>
                     )

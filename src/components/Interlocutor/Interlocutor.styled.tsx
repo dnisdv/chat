@@ -8,11 +8,19 @@ export const Wrapper = styled.div`
     position:relative;
     padding:10px 34px;
     box-sizing:border-box;
+    @media (max-width: 732px) {
+        padding-top:5px;
+        padding: 0px 5px;
+    };
 `
 
 export const Title = styled.h2`
     margin:0;
     font-size:20px;
+    @media (max-width: 732px) {
+        font-size:16px;
+    }
+    
 `
 export const Menu = styled.div` 
 
@@ -65,5 +73,40 @@ export const MenuImgWrapper = styled.div`
     cursor:pointer;
     &:active{
         background-color:#ebebeb;
+    };
+    @media (max-width: 732px) {
+        margin-left:15px;
     }
+`
+export const LeftSide = styled.div`
+    display:flex;   
+    align-items:center;
+    @media (max-width: 732px) {
+        &:hover{
+            background-color:#e6e6e6;
+            cursor:pointer
+        }
+    };
+`
+export const LeftSideData = styled.div`
+    display:flex;
+    flex-direction:column;
+`
+export const BackArrowImage = styled.img`
+    display:none;
+    @media (max-width: 732px) {
+        height:100%;
+        display:block;
+    };
+`
+export const LastSeen = styled.div`
+    font-size:16px;
+    color: rgb(0,0,0,0.5);
+    margin-top:5px;
+    @media (max-width: 732px) {
+        font-size:12px;
+    }
+`
+export const OnlineStatus = styled(LastSeen)`
+
 `

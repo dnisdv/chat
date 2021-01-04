@@ -59,6 +59,7 @@ export type ChatInputProps = {
     setisRecording:React.Dispatch<React.SetStateAction<boolean>>,
     setpassedTime:React.Dispatch<React.SetStateAction<number>>,
     textAreaRef:React.MutableRefObject<HTMLTextAreaElement | null>
+    KeyPressHandle:(e: React.KeyboardEvent<HTMLTextAreaElement>) => void
 }
 
 const ChatInput = ({
@@ -77,7 +78,8 @@ const ChatInput = ({
     onRecord,
     setisRecording,
     setpassedTime,
-    textAreaRef
+    textAreaRef,
+    KeyPressHandle
 }:ChatInputProps) => {
     return (
         <Wrapper>
@@ -101,11 +103,20 @@ const ChatInput = ({
                             <RecordTitle>Recording...</RecordTitle>
                         </RecordingWrapper> : ""}
                         <PerfectScrollbar>
-                            <InputText ref={textAreaRef} onKeyDown={autoResize} onChange={changeInputValue} value={isRecording ? "" : inputValue} placeholder={isRecording ? "" :"Type your message"}></InputText>
+                            <InputText
+                                onKeyDownCapture={KeyPressHandle}
+                                ref={textAreaRef} 
+                                onKeyDown={autoResize} 
+                                onChange={changeInputValue} 
+                                value={isRecording ? "" : inputValue} 
+                                placeholder={isRecording ? "" :"Type your message"} />
                         </PerfectScrollbar>
                 </LeftColumn>
                 <Controls>
-                    <Recorder setpassedTime={setpassedTime} setisRecording={setisRecording} isRecording={isRecording} succesRecord={onRecord} />
+                    {inputValue && inputValue.length > 0 ? "" : 
+                        <Recorder setpassedTime={setpassedTime} setisRecording={setisRecording} isRecording={isRecording} succesRecord={onRecord} />
+                    }
+                    
 
                     <EmojiControl >
                         <EmojiImg onClick={toogleEmojiOpen} src={EmojiIcon}  />
@@ -124,8 +135,7 @@ const ChatInput = ({
                         <FileUpload  disabled={AttachmentImages.length >= 12 ? true: false} onChange={uploadAttachmentHandle} type="file" id="Upload8fc44" accept="image/x-png,image/gif,image/jpeg"  multiple />
                         <AttachmentLabel htmlFor="Upload8fc44" ><Attachment src={AttachmentIcon} /></AttachmentLabel>
                     </AttachmentWrapper>
-                    
-                    <SendButton onClick={onSend}>
+                    <SendButton notEmpty={(inputValue && inputValue.length > 0 ) || (AttachmentImages && AttachmentImages.length > 0)} onClick={onSend}>
                         <img src={SendIcon} />
                     </SendButton>
                 </Controls>

@@ -1,5 +1,11 @@
 import React,{useRef, useState} from 'react'
 import ChatInputComponent, {AttachmentImagesType} from './ChatInput'
+import {useSelector, useDispatch} from 'react-redux'
+import {DialogState} from '../../redux/dialogs/types'
+import { createDialogs_sendMessage, createDialogs_sendVoiceRecord } from '../../redux/dialogs/actions'
+import { sendMessagetoDialog, sendVoiceRecord } from '../../redux/messages/actions'
+import socket from '../../core/socket'
+import { UserState } from '../../redux/user/types'
 
 export type EventTargetFiles = React.ChangeEvent<HTMLInputElement> & {
     target:{
@@ -14,8 +20,14 @@ const ChatInput = () => {
     const [AttachmentImages, setAttachmentImages] = useState<AttachmentImagesType[]>([])
     const [passedTime, setpassedTime] = useState<number>(0)
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+    const selectedUser = useSelector((state: {dialog:DialogState}) => state.dialog.selectedUser)
+    const currentDialog = useSelector((state: {dialog:DialogState}) => state.dialog.currentDialog)
+    const me = useSelector((state: {user:UserState}) => state.user.data)
 
-    const selectEmoji = (data:any) => {
+
+    const dispatch = useDispatch()
+
+    const selectEmoji = (data:{colons:string}) => {
         if(textAreaRef.current){
             setInputValue(InputValue + data.colons)
             textAreaRef.current.style.height = '55px';
@@ -33,7 +45,12 @@ const ChatInput = () => {
     }
 
     const onRecord = (blob:Blob) => {
-        console.log(blob)
+        if(selectedUser){
+            dispatch(createDialogs_sendVoiceRecord(blob, selectedUser._id))
+        }
+        else if(currentDialog){
+            dispatch(sendVoiceRecord(blob, currentDialog._id));
+        }
     }
 
     const uploadAttachmentHandle = (e:EventTargetFiles) => {
@@ -70,8 +87,28 @@ const ChatInput = () => {
     }
 
     const onSend = () => {
-        console.log("SEND")
-        //TODO ADD SEND FUNCTIONALITY
+        if(/([^\s])/.test(InputValue) || AttachmentImages && AttachmentImages.length > 0 ){
+            if(selectedUser){
+                dispatch(createDialogs_sendMessage(selectedUser._id, InputValue, AttachmentImages))
+                setAttachmentImages([])
+            }else if(currentDialog){
+                dispatch(sendMessagetoDialog(currentDialog._id, InputValue, AttachmentImages))
+                setAttachmentImages([])
+            }
+            setInputValue("")
+        }else{
+            setInputValue("")
+        }
+    }
+    const KeyPressHandle = (e:React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if(currentDialog){
+            socket.emit('DIALOGS:TYPING', { dialogId: currentDialog._id, userId: me._id });
+        }
+
+        if(e.key === "Enter"){
+            e.preventDefault()
+            onSend()
+        }
     }
 
     function PassedTimeFormat()  {
@@ -91,7 +128,8 @@ const ChatInput = () => {
     }
 
     return(
-        <ChatInputComponent
+        <>
+        {selectedUser || currentDialog ? <ChatInputComponent
             AttachmentImages={AttachmentImages}
             deleteAttachment={deleteAttachment}
             isRecording={isRecording}
@@ -111,7 +149,10 @@ const ChatInput = () => {
             setisRecording={setisRecording}
             setpassedTime={setpassedTime}
             textAreaRef={textAreaRef}
-        />
+            KeyPressHandle={KeyPressHandle}
+        /> :""}
+        
+        </>
     )
 }
 

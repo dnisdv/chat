@@ -15,10 +15,17 @@ import {
   RememberMeLabel,
   Additional,
   ForgetPassword,
-  ErrorFeedback
+  ErrorFeedback,
+  ServerErrorFeedback,
+  InputImage
 } from '../Auth.styled'
 import {Link} from 'react-router-dom'
 import * as yup from 'yup'
+import { useDispatch, useSelector } from "react-redux"
+import { User_Login } from '../../../redux/user/actions'
+import { useHistory } from "react-router-dom";
+import { UserState } from '../../../redux/user/types';
+import { email, password } from '../Assets/index'
 
 const SignInSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -27,15 +34,18 @@ const SignInSchema = yup.object().shape({
 });
 
 const LoginForm = () => {
+    const LoginError = useSelector( (state:{user : UserState}) => state.user.errors.login)
+    const history = useHistory()
+    const dispatch = useDispatch()
     return(
         <Formik
         initialValues={{ email: '', password: '' , remember:false}}
         validationSchema={SignInSchema}
         onSubmit={(values, { setSubmitting }) => { 
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          dispatch(User_Login({
+            email:values.email,
+            password:values.password
+          }, history, setSubmitting))
         }}
       >
         {({
@@ -50,9 +60,13 @@ const LoginForm = () => {
           <Wrapper>
             <Title>Sign in</Title>
             <SwitchParagraph>or <Link to="/signup">Sign up</Link></SwitchParagraph>
+            
+            {LoginError ? <ServerErrorFeedback>{LoginError}</ServerErrorFeedback> : ""}
 
-              <Form onSubmit={handleSubmit}>
+              <Form autoComplete="off" onSubmit={handleSubmit}>
+
                   <FormInputWrapper>
+                    <InputImage src={email} width="20px" height="20px" alt="email" />
                     <FormInput
                         type="email"
                         name="email"
@@ -66,6 +80,7 @@ const LoginForm = () => {
                 </FormInputWrapper>
     
                 <FormInputWrapper>
+                  <InputImage src={password} width="20px" height="20px" alt="pasword" />
                     <FormInput
                         type="password"
                         name="password"
@@ -97,8 +112,9 @@ const LoginForm = () => {
                 </Additional>
 
                 <FormSubmit type="submit" disabled={isSubmitting}>
-                  Submit
+                  Sign in
                 </FormSubmit>
+
               </Form>
           </Wrapper>
         )}

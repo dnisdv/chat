@@ -33,7 +33,7 @@ const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
       }else{
         const RectLeft = e.currentTarget.getBoundingClientRect().left
         const procentage = (+(+(+e.clientX - +RectLeft) * 100) / +e.currentTarget.offsetWidth) 
-        audioElem.current.currentTime = ((audioElem.current.duration / 100) * procentage)
+        audioElem.current.currentTime = +((audioElem.current.duration / 100) * procentage) - 0.2
 
         setCurrentTime(audioElem.current.currentTime)
       }
@@ -52,6 +52,7 @@ const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
         () => {
           setIsPlaying(false);
           setCurrentTime(0);
+          audioElem.current.currentTime = 0
         },
         false,
       );

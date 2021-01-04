@@ -9,6 +9,21 @@ export const AvatarWrapper = styled.div`
     position:relative;
 `
 
+export const AvatarNoImage = styled.div<AvatarImageProps>`
+    width:${({size}) => size + "px" };
+    height:${({size}) => size + "px" };
+    object-fit: cover;
+    border-radius:50%;
+    display:block;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:700;
+    user-select:none;
+    color:white;
+    font-size:${({size}) => size / 3 + "px" };
+`
+
 export const AvatarImage = styled.img<AvatarImageProps>`
     width:${({size}) => size + "px" };
     height:${({size}) => size + "px" };

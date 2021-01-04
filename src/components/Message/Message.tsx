@@ -11,8 +11,8 @@ import { MessageWrapper,
     ReadStatus,
     ReadIcon,
     AttachmentImage,
-    AttachmentsWrapper,
-    } from './Message.styled'
+    AttachmentsWrapper
+} from './Message.styled'
 import { formatDistance } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 
@@ -21,48 +21,57 @@ export type IsMeProps = {
 }
 
 export type MessageProps = {
+    id: string,
     text? : string,
     attachments?: {
+        _id:string,
         filename:string,
-        url:string
+        path:string
     }[],
     user: {
-        firstName:string,
-        lastName:string,
+        firstname:string,
+        lastname:string,
         avatar:string,
     },
     readed?:boolean,
     audio?:{
-        audioname:string,
-        url: string
+        filename:string,
+        path: string
         },
+    createdAt: string,
+    isTyping?: boolean
 } & IsMeProps
 
 
 
-const Message = ({text, user, isMe, readed, attachments, audio}: MessageProps) => {
+const Message = ({id, text, user, isMe, readed, attachments, audio, createdAt, isTyping}: MessageProps) => {
     return (
         <MessageWrapper isMe={isMe}>
             <AvatarWrapper isMe={isMe} className="Avatar_Wrapper">
-                <Avatar isOnline size={35} srcImage={user.avatar} />
+                <Avatar 
+                    isOnline 
+                    size={35} 
+                    srcImage={user.avatar} 
+                    user={{
+                        firstname: user.firstname,
+                        lastname:user.lastname
+                    }} />
             </AvatarWrapper>
 
             <MessageBubble attachment={!!(attachments)} isMe={isMe} >
-                {attachments ?<AttachmentsWrapper isText={!!(text)} >{attachments.map( (i) =>  {
-                        return <AttachmentImage isSingle={attachments.length === 1} src={i.url}  />
-                })}</AttachmentsWrapper>
-                : ""}
+                    {attachments ?<AttachmentsWrapper isText={!!(text)} >{attachments.map( (i) =>  {
+                            return <AttachmentImage key={i._id} isSingle={attachments.length === 1} src={"/" + i.path}  />
+                    })}</AttachmentsWrapper>
+                    : ""}
 
-                {audio ? <MessageAudio AudioUrl={audio.url} /> : text ? <MessageText>{text}</MessageText> : ""}
-    
-                {isMe ? <ReadStatus >
-                    {readed ? <ReadIcon src={ReadedIcon} width="16px" height="10px" /> : <ReadIcon src={CheckIcon} width="11px" height="8px" />}
-                </ReadStatus> : ""}
+                    {audio ? <MessageAudio AudioUrl={"/" + audio.path} /> : text ? <MessageText>{text}</MessageText> : ""}
+        
+                    {isMe ? <ReadStatus >
+                        {readed ? <ReadIcon src={ReadedIcon} width="16px" height="10px" /> : <ReadIcon src={CheckIcon} width="11px" height="8px" />}
+                    </ReadStatus> : ""}
             </MessageBubble>
+            {/* } */}
 
-            <TimeWrapper isMe={isMe} >
-                {formatDistance(new Date(), new Date(), { addSuffix: true, locale: enUS })}
-            </TimeWrapper>
         </MessageWrapper>
     )   
 }

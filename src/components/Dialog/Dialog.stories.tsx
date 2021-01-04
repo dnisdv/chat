@@ -24,14 +24,14 @@ const roomExample = {
 
 const Template: Story<DialogProps> = (args) => <Dialog {...args} ></Dialog>;
 
-export const Base = Template.bind({});
-Base.args = {
-    active:false,
-    user:userExample,
-    lastMessage:{
-      message:"Hello From last message :)",
-      date:new Date()
-    },
-    notReadedCount:1,
-};
+// export const Base = Template.bind({});
+// Base.args = {
+    // active:false,
+    // user:userExample,
+    // lastMessage:{
+    //   message:"Hello From last message :)",
+    //   date:new Date()
+    // },
+    // notReadedCount:1,
+// };
 

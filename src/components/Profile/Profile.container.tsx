@@ -1,13 +1,17 @@
 import React from 'react'
 import ProfileComponent from './Profile'
+import {useSelector} from 'react-redux'
+import { UserState } from '../../redux/user/types'
 
 const Profile = () => {
+    const user = useSelector((state:{user:UserState}) => state.user)
     return(
         <ProfileComponent 
-            user={{
-                firstName:"Denis",
-                lastName:"Gradinaru",
-                avatar:"https://avatars.mds.yandex.net/get-kino-vod-films-gallery/28788/47e2fd514411e18b76af786d7417062d/280x178_2"
+            user={{ 
+                username:user.data.username,
+                firstname:user.data.firstname,
+                lastname:user.data.lastname,
+                avatar:"",
             }}
         />
     )

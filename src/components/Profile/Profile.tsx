@@ -12,8 +12,9 @@ import {
 
 export type ProfileProps = {
     user:{
-        firstName:string,
-        lastName:string,
+        username:string,
+        firstname:string,
+        lastname:string,
         avatar:string
     }
 }
@@ -21,10 +22,18 @@ export type ProfileProps = {
 const Profile = ({user}: ProfileProps) => {
     return(
         <Wrapper>
-            <Avatar size={50} srcImage={user.avatar} />
+            <Avatar 
+                size={50} 
+                srcImage={user.avatar} 
+                user={{
+                    firstname:user.firstname,
+                    lastname:user.lastname
+                }}
+                
+            />
             <DataWrapper>
-                <FullName>{user.firstName + " " + user.lastName}</FullName>
-                <Username>@dnisdv</Username>
+                <FullName>{user.firstname + " " + user.lastname }</FullName>
+                <Username>@{user.username }</Username>
             </DataWrapper>
             <EditIMGwrapper>
                 <EditIMG src={EditIcon} />

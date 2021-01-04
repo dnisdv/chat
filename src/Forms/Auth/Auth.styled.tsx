@@ -29,8 +29,16 @@ export const FormInputWrapper = styled.div`
     margin-top:30px;
     &:first-children{
         margin-top:20px;
-    }
+    };
+    display:flex;
+    align-items:center;
 `
+export const InputImage = styled.img`
+    display:block
+    width:20px;
+    height:20px;
+`
+
 export const FormInputLabel = styled.label`
     position:absolute;
     top:50%;
@@ -41,25 +49,27 @@ export const FormInputLabel = styled.label`
     padding-right:5px;
     left:0;
     cursor:text;
+    margin-left:25px;
 `
 export const FormInput = styled.input`
+    margin-left:10px;
     width:100%;
     padding:13px 0px 13px 0px; 
     border:none;
     background:inherit;
     border-bottom: 1px solid #B557FF;
     background:inherit;
-    user-select: none;
     &:not([value=""]) ~ ${FormInputLabel}{
         top:0%;
         transition:.05s;
         font-size:12px;
-        padding-left:0px;
+        padding-left:5px;
     }
     &:focus + ${FormInputLabel}{
         top:0px;
         font-size:12px;
-        padding-left:0px;
+        padding-left:5px;
+        outile:none;
     };
     &:invalid{
         box-shadow: none;
@@ -69,6 +79,9 @@ export const FormInput = styled.input`
         -webkit-text-fill-color: green;
         -webkit-box-shadow: 0 0 0px 1000px #000 inset;
         transition: background-color 5000s ease-in-out 0s;
+    }   
+    &:focus-visible{
+        outline:none;
     }
 `
 
@@ -146,3 +159,11 @@ export const ErrorFeedback = styled.span`
     transform:translateY(-50%) translateX(100%) ;
     right:-20px;
 `
+
+export const ServerErrorFeedback = styled.span`
+    font-size:14px;
+    color:rgba(255,87,87,1);
+    display:block;
+    margin-top:10px;
+`
+// export const 

@@ -12,8 +12,10 @@
     "@types/react": "^16.14.1",
     "@types/react-custom-scrollbars": "^4.0.7",
     "@types/react-dom": "^16.9.10",
+    "@types/react-redux": "^7.1.12",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.4",
+    "axios": "^0.21.0",
     "date-fns": "^2.16.1",
     "emoji-mart": "^3.0.0",
     "formik": "^2.2.5",
@@ -22,8 +24,13 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.1",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-redux": "^7.2.2",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^3.0.4",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
     "web-vitals": "^0.2.4",
@@ -63,6 +70,8 @@
     "@storybook/node-logger": "^6.1.10",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.10",
-    "@types/dom-mediacapture-record": "^1.0.7"
-  }
+    "@types/dom-mediacapture-record": "^1.0.7",
+    "@types/react-responsive": "^8.0.2"
+  },
+  "proxy":"http://localhost:3003"
 }

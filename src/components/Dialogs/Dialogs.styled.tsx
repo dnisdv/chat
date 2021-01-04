@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
     overflow:hidden;
 `
 export const DialogWrapper = styled.div`
-
 `
 
 export const NoDialogsWrapper = styled.div`

@@ -2,6 +2,10 @@ import styled, {keyframes} from 'styled-components'
 
 export const Wrapper = styled.div`
     padding:24px 34px;
+    padding-top:14px;
+    @media (max-width: 732px) {
+        padding:0;
+    }
 `
 export const ChatWrapper = styled.div`
     background-color:white;
@@ -32,13 +36,24 @@ export const EmojiImg = styled.img`
 
 `
 
-export const SendButton = styled.button`
+export const SendButton = styled.button<{
+    notEmpty:boolean
+}>`
     height:100%;
-    width:55px;
+    width:45px;
     border:none;
     background-color:#231F30;
     cursor:pointer;
-    height:57px;
+    height:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:4px;
+    margin-right:12px;
+    @media (max-width: 732px) {
+        display:${({notEmpty}) => notEmpty ? "flex" : "none"};
+        margin-right:0px;
+    };
 `
 export const ControlWrapper = styled.div`
     display:flex;

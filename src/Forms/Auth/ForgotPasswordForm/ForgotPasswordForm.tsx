@@ -1,6 +1,5 @@
 import React from 'react'
 import { Formik } from 'formik';
-import { Link } from 'react-router-dom'
 import {
   Form,
   FormInput, 
@@ -9,10 +8,12 @@ import {
   FormInputLabel,
   Wrapper,
   Title,
-  ErrorFeedback
+  ErrorFeedback,
+  InputImage
 } from '../Auth.styled'
 import { Description } from './ForgotPasswordForm.styled'
 import * as yup from 'yup'
+import { email } from '../Assets'
 
 const ForgetPasswordSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -45,6 +46,7 @@ const ForgotPasswordForm = () => {
 
             <Form onSubmit={handleSubmit}>
                 <FormInputWrapper>
+                  <InputImage src={email} width="20px" height="20px" alt="email" />
                     <FormInput
                         type="email"
                         name="email"
@@ -58,7 +60,7 @@ const ForgotPasswordForm = () => {
                 </FormInputWrapper>
                 
                 <FormSubmit type="submit" disabled={isSubmitting}>
-                    Submit
+                    Restore
                 </FormSubmit>
             </Form>
           </Wrapper>

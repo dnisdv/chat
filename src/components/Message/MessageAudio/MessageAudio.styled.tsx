@@ -20,7 +20,7 @@ export const ControlImg = styled.img`
 export const ProgressBar = styled.div`
     position:absolute;
     height:100%;
-    width:200px;
+    width:0px;
     background-color:rgb(159, 191, 255);
     left:0;
     z-index:1;

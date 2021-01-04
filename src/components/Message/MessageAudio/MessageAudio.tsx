@@ -2,8 +2,8 @@ import React, {useEffect, useState, useRef} from 'react'
 import {Wrapper, Controls, ControlImg, ProgressBar, Wave, WaveImg, Duration} from './MessageAudio.styled'
 import PlayIcon from './assets/play-icon.svg'
 import PauseIcon from './assets/pause-button.svg'
-import WaveIcon from './assets/sound-waves.svg'
-import {MouseClickEvent } from './MessageAudio.container'
+import WaveIcon from '../../../Assets/img/sound-waves.svg'
+import { MouseClickEvent } from './MessageAudio.container'
 
 
 export type MessageAudioProps = {

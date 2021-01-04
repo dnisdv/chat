@@ -9,36 +9,67 @@ import {
     MenuItem,
     MenuImg,
     RightSide,
-    MenuImgWrapper
+    MenuImgWrapper,
+    LastSeen,
+    LeftSide,
+    OnlineStatus,
+    LeftSideData,
+    BackArrowImage
  } from './Interlocutor.styled'
+import leftArrow from './Assets/left-arrow.svg'
+import { formatDistance } from 'date-fns'
+import { enUS } from 'date-fns/locale'
+import { useMediaQuery } from 'react-responsive'
 
 export type InterlocutorProps = {
+    onBack: () => void,
+    type: "dialog" | "user",
     toggleMenu: () => void,
     isMenuOpen:boolean,
     clearHistory: (e:React.MouseEvent<HTMLLIElement>) => void,
     blockUser: (e:React.MouseEvent<HTMLLIElement>) => void,
     deleteChat: (e:React.MouseEvent<HTMLLIElement>) => void,
     user:{
-        firstName:string,
-        lastName:string,
-        avatar:string
+        firstname:string,
+        lastname:string,
+        avatar:string,
+        last_seen:string,
+        isOnline?:boolean
     }
 }
 
 const Interlocutor = ({
+    onBack,
     toggleMenu,
     isMenuOpen,
     clearHistory,
     blockUser,
     deleteChat,
-    user
+    user,
 }: InterlocutorProps) => {
+    const isMobile = useMediaQuery({
+        query: '(max-width: 732px)'
+      })
     return(
         <Wrapper>
-            <Title>{user.firstName + " " + user.lastName}</Title>
+            <LeftSide onClick={onBack} >
+                <BackArrowImage src={leftArrow} width="20px" height="20px" />
+                <LeftSideData>
+                        <Title>{user.firstname + " " + user.lastname}</Title>
+                    {user.isOnline ? 
+                        <OnlineStatus>Online</OnlineStatus>
+                    :
+                        <LastSeen>Was online {formatDistance(Date.parse(user.last_seen), new Date(), { addSuffix: true, locale: enUS })}</LastSeen> 
+                    }
+                </LeftSideData>
+            </LeftSide>
             <RightSide>
                 <Avatar
-                        size={50}
+                        user={{
+                            firstname:user.firstname,
+                            lastname:user.lastname
+                        }}
+                        size={isMobile ? 35 :50}
                         srcImage={user.avatar} />
                 <Menu>
                     <MenuImgWrapper onClick={toggleMenu} >

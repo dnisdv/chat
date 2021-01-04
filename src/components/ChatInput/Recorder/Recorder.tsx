@@ -36,7 +36,7 @@ const Recorder = ({
                         setpassedTime((prevState:number) => prevState + 1 )
                     }, 1000)
         
-                    mediaRecorder.addEventListener("dataavailable", (e:any) => {
+                    mediaRecorder.addEventListener("dataavailable", (e) => {
                         chunks.push(e.data)
                     })
                     mediaRecorder.addEventListener("stop" , () => {
@@ -45,7 +45,7 @@ const Recorder = ({
                         const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' })
                         
                         chunks = []
-                        stream.getAudioTracks().forEach((track:any) => track.stop())
+                        stream.getAudioTracks().forEach((track) => track.stop())
         
                         if(blob.size < 16769) {
                             return

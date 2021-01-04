@@ -10,28 +10,41 @@ import {
   Wrapper,
   Title,
   SwitchParagraph,
-  ErrorFeedback
+  ErrorFeedback,
+  ServerErrorFeedback,
+  InputImage
 } from '../Auth.styled'
 import * as yup from 'yup'
+import {useDispatch, useSelector} from "react-redux"
+import {User_Register} from '../../../redux/user/actions'
+import { UserState } from '../../../redux/user/types'
+import { useHistory } from "react-router-dom"
+import {name, at, email, password} from '../Assets'
 
 const SignupSchema = yup.object().shape({
   username: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
 });
 
 const RegisterForm = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const registerError = useSelector( (state: {user: UserState}) => state.user.errors.register)
     return(
         <Formik
-          initialValues={{ firstName:"", lastName:"", username:'', email: '', password: '' }}
+          initialValues={{ firstname:'', lastname:'', username:'', email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+            dispatch(User_Register({
+              firstname:values.firstname,
+              lastname:values.lastname,
+              username:values.username,
+              email:values.email,
+              password:values.password
+            }, history, setSubmitting))
           }}
         >
         {({
@@ -46,35 +59,40 @@ const RegisterForm = () => {
           <Wrapper>
             <Title>Sign up</Title>
             <SwitchParagraph>or <Link to="/signin">Sign in</Link></SwitchParagraph>
+
+            {registerError ? <ServerErrorFeedback>{registerError}</ServerErrorFeedback> : ""}
             <Form onSubmit={handleSubmit}>
 
               <FormInputWrapper>
+                    <InputImage src={name} width="20px" height="20px" alt="first name" />
                     <FormInput
                         type="text"
-                        name="firstName"
+                        name="firstname"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.firstName}
-                        id="registerformfirstName"
+                        value={values.firstname}
+                        id="registerformfirstname"
                     />
-                    <FormInputLabel htmlFor="registerformfirstName">First name</FormInputLabel>
-                    {errors.firstName && touched.firstName && <ErrorFeedback>{errors.firstName}</ErrorFeedback>}
+                    <FormInputLabel htmlFor="registerformfirstname">First name</FormInputLabel>
+                    {errors.firstname && touched.firstname && <ErrorFeedback>{errors.firstname}</ErrorFeedback>}
                 </FormInputWrapper>
 
                 <FormInputWrapper>
+                    <InputImage src={name} width="20px" height="20px" alt="last name" />
                     <FormInput
                         type="text"
-                        name="lastName"
+                        name="lastname"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.lastName}
-                        id="registerformlastName"
+                        value={values.lastname}
+                        id="registerformlastname"
                     />
-                    <FormInputLabel htmlFor="registerformlastName">Last name</FormInputLabel>
-                    {errors.lastName && touched.lastName && <ErrorFeedback>{errors.lastName}</ErrorFeedback>}
+                    <FormInputLabel htmlFor="registerformlastname">Last name</FormInputLabel>
+                    {errors.lastname && touched.lastname && <ErrorFeedback>{errors.lastname}</ErrorFeedback>}
                 </FormInputWrapper>
 
                 <FormInputWrapper>
+                  <InputImage src={at} width="20px" height="20px" alt="last name" />
                     <FormInput
                         type="text"
                         name="username"
@@ -88,6 +106,7 @@ const RegisterForm = () => {
                 </FormInputWrapper>
 
                 <FormInputWrapper>
+                    <InputImage src={email} width="20px" height="20px" alt="email" />
                     <FormInput
                         type="email"
                         name="email"
@@ -101,6 +120,7 @@ const RegisterForm = () => {
                 </FormInputWrapper>
     
                 <FormInputWrapper>
+                    <InputImage src={password} width="20px" height="20px" alt="password" />
                     <FormInput
                         type="password"
                         name="password"
@@ -114,7 +134,7 @@ const RegisterForm = () => {
                 </FormInputWrapper>
                 
                 <FormSubmit type="submit" disabled={isSubmitting}>
-                    Submit
+                    Sign up
                 </FormSubmit>
             </Form>
           </Wrapper>
