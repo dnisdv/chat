@@ -30,35 +30,43 @@ const Messages = () => {
         clearInterval(typingTimeoutId);
         typingTimeoutId = setTimeout(() => {
           setIsTyping(false);
-        }, 3000);
+        }, 1000);
       };
+
+      useEffect(() => {
+        const AddMessage = (Message:any) => {
+            dispatch(add_message(Message))
+            currentDialog && 
+            dispatch(messageUpdateReadStatus({userId:me?._id, dialogId:currentDialog._id }))
+        };
+        socket.on('SERVER:NEW_MESSAGE', AddMessage);
+        socket.on('SERVER:MESSAGES_READED', (data:any) =>{
+            dispatch(messageUpdateReadStatus(data))
+         });
+        socket.emit("updateNotReadCount", {userId: me?._id, dialogId:currentDialog?._id} )
+
+        return () => socket.removeListener('SERVER:NEW_MESSAGE', AddMessage);
+    
+        
+    }, [])
 
     useEffect(() => {
         socket.on('DIALOGS:TYPING', ({dialogId, userId}:any) => {
             if(currentDialog){
-                if(currentDialog._id === dialogId && me._id !== userId){
+                if(currentDialog._id === dialogId && me?._id !== userId){
                     toggleIsTyping();
                 }
             }
         });
     }, [currentDialog])
 
-    useEffect(() => {
-        const AddMessage = (Message:any) => {
-            dispatch(add_message(Message))
-            currentDialog && 
-            dispatch(messageUpdateReadStatus({userId:me._id, dialogId:currentDialog._id }))
-        };
-        socket.on('SERVER:NEW_MESSAGE', AddMessage);
-        socket.on('SERVER:MESSAGES_READED', (data:any) =>{
-            dispatch(messageUpdateReadStatus(data))
-         });
-        return () => socket.removeListener('SERVER:NEW_MESSAGE', AddMessage);
-    
-    }, [])
 
 
+    if(!me){
+        return <></>
+    }
     return(
+        
         <MessagesComponent
             isTyping={isTyping}
             user={me}
@@ -73,7 +81,7 @@ const Messages = () => {
                         user:{
                             firstname:i.user.firstname,
                             lastname:i.user.lastname,
-                            avatar:""
+                            avatar:i.user.avatar
                         },
                         attachments:i.attachments,
                         audio:i.audio,

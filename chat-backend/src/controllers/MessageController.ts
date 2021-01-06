@@ -154,7 +154,6 @@ class MessageController {
                 }
               }
             );
-
             res.json(message);
 
             this.io.emit("SERVER:NEW_MESSAGE", message);
@@ -165,6 +164,10 @@ class MessageController {
         res.json(reason);
       });
   };
+
+  // clearHistory = (req :any, res:express.Response) {
+    
+  // }
 
   delete = (req: any, res: express.Response): void => {
     const id: string = req.query.id;

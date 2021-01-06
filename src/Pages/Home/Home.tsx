@@ -12,11 +12,14 @@ import { DialogState } from '../../redux/dialogs/types'
 import FoundUsers from '../../components/FoundUsers/FoundUsers.container'
 import { messageUpdateReadStatus, getMessages } from '../../redux/messages/actions'
 import socket from '../../core/socket'
+import { UserState } from '../../redux/user/types'
 
 const Home = () => {
     const foundUsers = useSelector( (state:{dialog:DialogState}) => state.dialog.usersfound)
     const currentDialog = useSelector( (state:{dialog:DialogState}) => state.dialog.currentDialog)
     const selectedUser = useSelector( (state:{dialog:DialogState}) => state.dialog.selectedUser)
+    const me = useSelector( (state:{user:UserState}) => state.user.data)
+
 
 
     const dispatch = useDispatch()
@@ -34,7 +37,9 @@ const Home = () => {
         // socket.on('SERVER:MESSAGES_READED', (data:any) =>{dispatch(fetchDialogs())});
     }, [])
 
-
+    if(!me){
+        return <></>
+    }
     return(
         <Wrapper>
             <SideMenu isSelect={!!(currentDialog || selectedUser)}>

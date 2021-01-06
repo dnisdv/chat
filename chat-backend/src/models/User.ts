@@ -11,7 +11,10 @@ export interface IUser extends Document {
   lastname:string,
   password: string,
   confirmed: boolean,
-  avatar: string,
+  avatar: {
+    path:string,
+    filename:string
+  },
   confirm_hash: string,
   last_seen: Date,
   data?: IUser,
@@ -38,12 +41,21 @@ const UserSchema: Schema = new Schema(
       type: String,
       required: "Lastname is required",
     },
+    bio:{
+      type:String,
+    },
     password: {
       type: String,
       required: "Password is required",
     },
-
-    avatar: String,
+    avatar: {
+      path:{
+        type:String
+      },
+      filename:{
+        type:String
+      }
+    },
     last_seen: {
       type: Date,
       default: new Date(),

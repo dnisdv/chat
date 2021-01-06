@@ -18,6 +18,9 @@ const Recorder = ({
     }: RecorderProps) => {
         const [mediaRecorder, setmediaRecorder] = useState<MediaRecorder | null>()
         let timePassing:number 
+        if(!navigator.mediaDevices){
+            return <> </>
+        }
 
         const handleSuccess = (strem:MediaStream, event:React.MouseEvent<HTMLDivElement>) => {
                 let chunks:any[] = []
@@ -64,6 +67,7 @@ const Recorder = ({
             navigator.mediaDevices
                 .getUserMedia({audio:true})
                 .then(stream =>(handleSuccess(stream, event)))
+                .catch( (e) => console.log(e) )
         }
     
         const stopRecording = () => {

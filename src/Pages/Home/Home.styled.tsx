@@ -25,8 +25,6 @@ export const SideMenu = styled.div<{
     box-sizing: border-box;
     min-width:243px;
     @media (max-width: 732px) {
-        // position: ${({isSelect}) => isSelect ? "absolute" : "relative"};
-        // left: ${({isSelect}) => isSelect ? "-100%" : "0%"};
         max-width:100%;
         width:100%;
         padding:10px 5px;

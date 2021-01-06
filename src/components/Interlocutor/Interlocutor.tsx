@@ -32,7 +32,10 @@ export type InterlocutorProps = {
     user:{
         firstname:string,
         lastname:string,
-        avatar:string,
+        avatar:{
+            filename:string,
+            path:string
+        },
         last_seen:string,
         isOnline?:boolean
     }
@@ -70,7 +73,7 @@ const Interlocutor = ({
                             lastname:user.lastname
                         }}
                         size={isMobile ? 35 :50}
-                        srcImage={user.avatar} />
+                        srcImage={user.avatar ? user.avatar.path : null} />
                 <Menu>
                     <MenuImgWrapper onClick={toggleMenu} >
                         <MenuImg src={MenuIcon} />

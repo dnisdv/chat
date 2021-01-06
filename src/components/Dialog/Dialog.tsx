@@ -38,7 +38,10 @@ export type DialogProps = {
     user:{
         firstname:string,
         lastname:string,
-        avatar:string,
+        avatar:{
+            filename:string,
+            path:string
+        } | null,
         username :string,
         isOnline?:boolean
     }
@@ -66,7 +69,7 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
         <Wrapper onClick={() => onClick && onClick(dialog)} active={active}>
             <Avatar 
                 size={60} 
-                srcImage={user.avatar} 
+                srcImage={user.avatar ? user.avatar.path : ""} 
                 isOnline={user.isOnline}
                 user={{
                     firstname: user.firstname,
@@ -93,8 +96,8 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
                                     <TypingDot />
                                 </Typing>
                         </TypingWrapper>
-                    : <div>
-                        {lastMessage ? 
+                    : 
+                        lastMessage ? 
                         <LastMessage>
                         {lastMessage.fromMe ? "You: ": ""}
                         {!lastMessage ? "Error":
@@ -104,7 +107,7 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
                         }
                         </LastMessage>
                     : ""}
-                    </div>}
+                    
                     
                 {  lastMessage ? notReadedCount && notReadedCount > 0 ? <NotReaded>{notReadedCount > 99 ? "99+" : notReadedCount}</NotReaded> : "" : "" }
                 </LastMessageWrapper> 

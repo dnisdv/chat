@@ -26,7 +26,10 @@ Base.args = {
   user: {
       firstname:"Dwight",
       lastname:"Schrute",
-      avatar:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+      avatar:{
+        filename:"1",
+        path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+      }
   },
   readed:false,
   text:"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born",
@@ -39,8 +42,10 @@ Audio.args = {
   user: {
     firstname:"Dwight",
     lastname:"Schrute",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-  },
+    avatar:{
+      filename:"1",
+      path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+    }  },
   readed:false,
   audio:{
     filename:"Sample audio",
@@ -55,8 +60,10 @@ Attachments.args = {
   user: {
     firstname:"Dwight",
     lastname:"Schrute",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-  },
+    avatar:{
+      filename:"1",
+      path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+    }  },
   readed:false,
   attachments:[
     {
@@ -93,8 +100,10 @@ Attachment.args = {
   user: {
     firstname:"Dwight",
     lastname:"Schrute",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-  },
+    avatar:{
+      filename:"1",
+      path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+    }  },
   readed:false,
   attachments:[
     {
@@ -111,8 +120,10 @@ AttachemntWithText.args = {
   user: {
     firstname:"Dwight",
     lastname:"Schrute",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-  },
+    avatar:{
+      filename:"1",
+      path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+  }  },
   readed:false,
   attachments:[
     {

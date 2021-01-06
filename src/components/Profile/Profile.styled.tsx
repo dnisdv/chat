@@ -13,7 +13,7 @@ export const DataWrapper = styled.div`
 
 export const FullName = styled.p`
     margin:0;
-    font-size:18px; 
+    font-size:18px;
     font-weight:700;
     max-width:240px;
 `
@@ -21,11 +21,11 @@ export const FullName = styled.p`
 export const Username = styled.p`
     margin:0;
     text-overflow: ellipsis;
-    overflow: hidden; 
+    overflow: hidden;
     white-space: nowrap;
     max-width:240px;
     margin-top:4px;
-    color:rgb(0,0,0,0.6);   
+    color:rgb(0,0,0,0.6);
 `
 export const EditIMGwrapper = styled.div`
     margin-left:auto;

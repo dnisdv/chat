@@ -4,9 +4,15 @@ export const Wrapper = styled.div`
 `
 
 export const FormWrapper = styled.div`
-    width:400px;
+    max-width: 400px;
+    width: 100%;
     margin:0 auto;
+    padding: 0px 15px;
     margin-top:10%;
+    box-sizing: border-box;
+    @media (max-width: 732px) {
+
+    }
 `
 
 export const AuthTitle = styled.h1`

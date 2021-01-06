@@ -40,7 +40,7 @@ export const LastMessageWrapper = styled.div`
     margin-top:7px;
     display:flex;
     align-items:center;
-    display:flex;
+    overflow:hidden;
 `
 
 export const LastMessage = styled.p`

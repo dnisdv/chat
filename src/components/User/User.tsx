@@ -21,7 +21,7 @@ const User = ({user, active, selectUser}: UserProps) => {
         <Wrapper onClick={() => selectUser ?  selectUser(user) :""} active={active}>
             <Avatar 
                 size={60} 
-                srcImage={user.avatar} 
+                srcImage={user.avatar ? user.avatar.path : null} 
                 user={{
                     firstname: user.firstname,
                     lastname: user.lastname

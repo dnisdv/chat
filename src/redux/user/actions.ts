@@ -1,6 +1,8 @@
 import axios from '../../core/axios'
 import {ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {History} from 'history'
+import {ActionCreator, Dispatch} from 'redux';
+
 import {
     LoginData,
     RegisterData,
@@ -13,7 +15,9 @@ import {
     Userdata,
     UserLoginResponse,
     LOGIN_ERROR,
-    REGISTER_ERROR
+    REGISTER_ERROR,
+    UserState,
+    USER_LOGOUT
 } from './types'
 
 export const fetch_User = (history?:History): ThunkAction<Promise<void>, {}, {}, UserActionTypes> => {
@@ -24,24 +28,48 @@ export const fetch_User = (history?:History): ThunkAction<Promise<void>, {}, {},
       return axios.get<Userdata>("/user/me").then((res) => {
         dispatch({
           type:SET_USER_DATA,
-          payload:{
-            username:res.data.username,
-            firstname:res.data.firstname,
-            lastname:res.data.lastname,
-            email: res.data.email,
-            createdAt:res.data.createdAt,
-            _id:res.data._id,
-            bio:"",
-            last_seen:res.data.last_seen,
-            isOnline:res.data.isOnline
-          }
+          payload:res.data
         })
         history!.push('/')
       }).catch(() => {
+
       })
 
   }
 }
+
+export const User_Update = (
+  data: Partial<Userdata>
+): ThunkAction<Promise<void>, {}, {}, UserActionTypes> => {
+return async (dispatch: ThunkDispatch<{}, {}, UserActionTypes>): Promise<void> => {
+    return axios.put<Userdata>("/user/update", data).then((res) => {
+      dispatch({
+        type:SET_USER_DATA,
+        payload:res.data
+      })
+    }).catch((e) => {
+      console.log(e)
+    })
+}
+}
+
+export const User_UdateAvatar = (
+  file:File
+): ThunkAction<Promise<void>, {}, {}, UserActionTypes> => {
+return async (dispatch: ThunkDispatch<{}, {}, UserActionTypes>): Promise<void> => {
+    const formdata = new FormData()
+    formdata.append("avatar", file)
+    return axios.put<Userdata>("/user/update", formdata).then((res) => {
+      dispatch({
+        type:SET_USER_DATA,
+        payload:res.data
+      })
+    }).catch((e) => {
+      console.log(e)
+    })
+}
+}
+
 
 export const User_Login = (
     {email, password}:LoginData,
@@ -103,3 +131,16 @@ export const User_Register = (
       })
   }
 }
+
+export const userLogout: ActionCreator<ThunkAction<{}, UserState, {}, any>> = (
+  history:any
+  ) => {
+    return (dispatch: Dispatch<any>): any => {
+      localStorage.removeItem('token');
+      dispatch({
+        type: USER_LOGOUT,
+      });
+      history.push('/signin')
+
+    };
+};

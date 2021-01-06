@@ -21,10 +21,10 @@ Base.args = {
     clearHistory: (e:React.MouseEvent<HTMLLIElement>) => {},
     blockUser: (e:React.MouseEvent<HTMLLIElement>) => {},
     deleteChat: (e:React.MouseEvent<HTMLLIElement>) => {},
-    user:{
-        firstname:"uh oh buh",
-        lastname: "Hellboy",
-        avatar:"https://i.ytimg.com/vi/yq5SOqjb32s/maxresdefault.jpg",
-        last_seen: "2020-12-31T07:36:42.439Z"
-    }
+    // user:{
+    //     firstname:"uh oh buh",
+    //     lastname: "Hellboy",
+    //     avatar:"https://i.ytimg.com/vi/yq5SOqjb32s/maxresdefault.jpg",
+    //     last_seen: "2020-12-31T07:36:42.439Z"
+    // }
 };

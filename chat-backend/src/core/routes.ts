@@ -5,7 +5,7 @@ import { checkAuth } from "../middlewares";
 import { loginValidation, registerValidation } from "../utils/validations";
 const path = require("path");
 import updateLastSeen from '../middlewares/updateLastSeen'
-import { uploadImageMiddleware, uploadRecord } from '../utils/multer'
+import { uploadImageMiddleware, uploadRecord, uploadAvatar } from '../utils/multer'
 import {
   UserCtrl,
   DialogCtrl,
@@ -20,6 +20,8 @@ const createRoutes = (app: express.Express, io: socket.Server) => {
   
   app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
   app.use("/record", express.static(path.join(__dirname, "../../record")));
+  app.use("/avatar", express.static(path.join(__dirname, "../../avatar")));
+
 
   app.use(bodyParser.json());
   app.use(checkAuth);
@@ -35,6 +37,7 @@ const createRoutes = (app: express.Express, io: socket.Server) => {
   app.get("/user/find", UserController.findUsers);
   app.get("/user/:id", UserController.show);
   app.delete("/user/:id", UserController.delete); 
+  app.put("/user/update", uploadAvatar, UserController.update)
 
 
   app.get("/dialogs",  DialogController.index);

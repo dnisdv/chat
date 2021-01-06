@@ -9,9 +9,9 @@ import {
 } from './Avatar.styled'
 
 export type AvatarProps = {
-    srcImage?:string
+    srcImage?:string | null,
     size: number,
-    isOnline?:boolean
+    isOnline?:boolean,
     user:{
         firstname:string,
         lastname:string,

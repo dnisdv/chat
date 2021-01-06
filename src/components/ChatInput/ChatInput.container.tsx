@@ -101,7 +101,7 @@ const ChatInput = () => {
         }
     }
     const KeyPressHandle = (e:React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if(currentDialog){
+        if(currentDialog && me){
             socket.emit('DIALOGS:TYPING', { dialogId: currentDialog._id, userId: me._id });
         }
 

@@ -101,6 +101,22 @@ class UserController {
       res.status(500).send(e)
     }
   };
+  update = async (req: any,
+    res: express.Response): Promise<void> => {
+    try{
+      const userId = req.user._id
+      const user = await UserModel.findOneAndUpdate({_id: userId}, {
+        ...req.body,
+        ...req.file && {avatar: req.file}  
+      },{
+        new: true
+      })
+      user.save()
+      res.send(user);
+    }catch(e){
+      res.status(500).send(e)
+    }
+  };
 
   create = (req: any, res: express.Response): void => {
     try{
@@ -164,5 +180,6 @@ class UserController {
     }
   };
 }
+
 
 export default UserController;

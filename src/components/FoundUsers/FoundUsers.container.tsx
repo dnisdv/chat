@@ -14,7 +14,7 @@ const FoundUsers = () => {
                         _id:i._id,
                         firstname:i.firstname,
                         lastname:i.lastname,
-                        avatar:"",
+                        avatar:i.avatar,
                         username:i.username,
                         email:i.email,
                         createdAt:i.createdAt,

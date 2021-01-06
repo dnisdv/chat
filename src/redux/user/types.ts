@@ -6,6 +6,7 @@ export const USER_REGISTER = "USER_REGISTER"
 export const LOGIN_ERROR = "LOGIN_ERROR"
 export const REGISTER_ERROR = "REGISTER_ERROR"
 export const USER_LOADING = "USER_LOADING"
+export const USER_LOGOUT = "USER_LOGOUT"
 
 export type LoginData = {
     email:string,
@@ -22,6 +23,10 @@ export type RegisterData = {
 
 export type Userdata = {
     _id:string,
+    avatar:{
+        filename:"",
+        path:""
+    }
     username:string,
     firstname:string,
     lastname:string,
@@ -62,6 +67,10 @@ interface USER_LOADING{
     type: typeof USER_LOADING,
 }
 
+interface USER_LOGOUT_ACTION{
+    type:typeof USER_LOGOUT
+}
+
 export type UserLoginResponse = {
     status:string,
     token:string
@@ -74,16 +83,17 @@ export type UserActionTypes =
     SET_USER_AUTH_ACTION |
     USER_LOADING |
     RegisterUserErrorAction |
-    LoginUserErrorAction
+    LoginUserErrorAction |
+    USER_LOGOUT_ACTION
 ;
 
 export type UserState = {
-    data:Userdata
+    data:Userdata | null;
     errors:{
         login:string,
         register:string
     },
-    token:string,
+    token:string | null,
     isAuth:boolean,
     loading:boolean,
 }

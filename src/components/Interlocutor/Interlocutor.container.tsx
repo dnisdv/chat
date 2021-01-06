@@ -26,7 +26,6 @@ const Interlocutor = () => {
     }
 
     const onBack = () => {
-        console.log("BACK")
         dispatch(resetCurrentDialog())
     }
 
@@ -38,7 +37,7 @@ const Interlocutor = () => {
             user={{
                 firstname:selectedUser.firstname,
                 lastname:selectedUser.lastname,
-                avatar: "",
+                avatar: selectedUser.avatar,
                 last_seen:selectedUser.last_seen,
                 isOnline: selectedUser.isOnline
             }}
@@ -50,7 +49,7 @@ const Interlocutor = () => {
         />)
     }
     if( currentDialog ){
-        const user = me._id === currentDialog.partner._id ? currentDialog.author : currentDialog.partner;
+        const user = me?._id === currentDialog.partner._id ? currentDialog.author : currentDialog.partner;
         return(
             <InterlocutorComponent
                 onBack={onBack}
@@ -58,7 +57,7 @@ const Interlocutor = () => {
                 user={{
                     firstname:user.firstname,
                     lastname:user.lastname,
-                    avatar: "",
+                    avatar: user.avatar,
                     last_seen:user.last_seen,
                     isOnline: user.isOnline
                 }}

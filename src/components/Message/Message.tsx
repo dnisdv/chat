@@ -31,7 +31,10 @@ export type MessageProps = {
     user: {
         firstname:string,
         lastname:string,
-        avatar:string,
+        avatar:{
+            filename:string,
+            path:string
+        },
     },
     readed?:boolean,
     audio?:{
@@ -51,7 +54,7 @@ const Message = ({id, text, user, isMe, readed, attachments, audio, createdAt, i
                 <Avatar 
                     isOnline 
                     size={35} 
-                    srcImage={user.avatar} 
+                    srcImage={user.avatar ? user.avatar.path : null} 
                     user={{
                         firstname: user.firstname,
                         lastname:user.lastname

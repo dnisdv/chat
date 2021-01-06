@@ -54,7 +54,7 @@ const Dialogs = () => {
                         _id: Realuser._id,
                         firstname: Realuser.firstname,
                         lastname: Realuser.lastname,
-                        avatar:"",
+                        avatar: Realuser.avatar ? Realuser.avatar : null,
                         username: Realuser.username,
                         isOnline: Realuser.isOnline,
                     },

@@ -23,7 +23,10 @@ type DialogsProps = {
             _id:string,
             firstname:string,
             lastname:string,
-            avatar:string,
+            avatar:{
+                filename:string,
+                path:string
+            } | null,
             username:string
         },
         lastMessage:{

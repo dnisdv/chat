@@ -5,21 +5,12 @@ import {
     SET_USER_AUTH,
     USER_LOADING,
     LOGIN_ERROR,
-    REGISTER_ERROR
+    REGISTER_ERROR,
+    USER_LOGOUT
   } from './types'
   
   export const initialState:UserState = {
-    data: {
-      firstname:"",
-      lastname:"",
-      username:"",
-      email:"",
-      bio:"",
-      _id:"",
-      createdAt:"",
-      last_seen:"",
-      isOnline:false
-    },
+    data: null,
     errors:{
       login:"",
       register:""
@@ -39,17 +30,7 @@ import {
       case SET_USER_DATA:
         return {
           ...state,
-          data: {
-            _id:action.payload._id,
-            firstname: action.payload.firstname,
-            lastname: action.payload.lastname,
-            username: action.payload.username,
-            email: action.payload.email,
-            bio: "",
-            createdAt:action.payload.createdAt,
-            last_seen:action.payload.last_seen,
-            isOnline:action.payload.isOnline
-          },
+          data: action.payload,
           isAuth: true,
           token: window.localStorage.token,
           loading:false,
@@ -84,6 +65,13 @@ import {
             register:action.payload
           }
       }
+      case USER_LOGOUT : 
+        return {
+          ...state,
+          data:null,
+          isAuth:false,
+          token:null
+        }
       default:
         return state;
     }

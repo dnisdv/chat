@@ -125,7 +125,7 @@ export const RememberMeCheckbox = styled.input`
 export const FormSubmit = styled.button`
     height: 64px;
     background-color: #B557FF;
-    border-radius:55px;
+    border-radius:10px;
     width:100%;
     max-width:500px;
     margin:0 auto;
@@ -140,6 +140,9 @@ export const Additional = styled.div`
     display:flex;
     margin-top:30px;
     justify-content:space-between;
+    @media (max-width: 270px) {
+        flex-direction:column;
+    }
 `
 
 export const ForgetPassword = styled.p`
