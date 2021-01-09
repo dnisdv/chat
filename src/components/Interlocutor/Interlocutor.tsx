@@ -26,8 +26,6 @@ export type InterlocutorProps = {
     type: "dialog" | "user",
     toggleMenu: () => void,
     isMenuOpen:boolean,
-    clearHistory: (e:React.MouseEvent<HTMLLIElement>) => void,
-    blockUser: (e:React.MouseEvent<HTMLLIElement>) => void,
     deleteChat: (e:React.MouseEvent<HTMLLIElement>) => void,
     user:{
         firstname:string,
@@ -45,17 +43,16 @@ const Interlocutor = ({
     onBack,
     toggleMenu,
     isMenuOpen,
-    clearHistory,
-    blockUser,
     deleteChat,
     user,
+    type
 }: InterlocutorProps) => {
     const isMobile = useMediaQuery({
         query: '(max-width: 732px)'
       })
     return(
         <Wrapper>
-            <LeftSide onClick={onBack} >
+            <LeftSide onClick={() => isMobile && onBack()} >
                 <BackArrowImage src={leftArrow} width="20px" height="20px" />
                 <LeftSideData>
                         <Title>{user.firstname + " " + user.lastname}</Title>
@@ -74,16 +71,16 @@ const Interlocutor = ({
                         }}
                         size={isMobile ? 35 :50}
                         srcImage={user.avatar ? user.avatar.path : null} />
-                <Menu>
-                    <MenuImgWrapper onClick={toggleMenu} >
-                        <MenuImg src={MenuIcon} />
-                    </MenuImgWrapper>
-                    <MenuList open={isMenuOpen}>
-                        <MenuItem onClick={clearHistory}>Clear history</MenuItem>
-                        <MenuItem onClick={blockUser}>Block user</MenuItem>
-                        <MenuItem onClick={deleteChat} >Delete chat</MenuItem>
-                    </MenuList>
-                </Menu>
+                {type === "user" ? "":
+                    <Menu>
+                        <MenuImgWrapper onClick={toggleMenu} >
+                            <MenuImg src={MenuIcon} />
+                        </MenuImgWrapper>
+                        <MenuList open={isMenuOpen}>
+                            <MenuItem onClick={deleteChat} >Delete chat</MenuItem>
+                        </MenuList>
+                    </Menu>
+                }
             </RightSide>
         </Wrapper>
     )

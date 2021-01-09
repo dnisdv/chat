@@ -10,17 +10,15 @@ import { searchDialogs, clearFoundDialogs, fetchDialogs } from '../../redux/dial
 import { useDispatch, useSelector } from 'react-redux'
 import { DialogState } from '../../redux/dialogs/types'
 import FoundUsers from '../../components/FoundUsers/FoundUsers.container'
-import { messageUpdateReadStatus, getMessages } from '../../redux/messages/actions'
-import socket from '../../core/socket'
 import { UserState } from '../../redux/user/types'
+import { Redirect } from "react-router-dom"
+import { userLogout } from '../../redux/user/actions'
 
 const Home = () => {
     const foundUsers = useSelector( (state:{dialog:DialogState}) => state.dialog.usersfound)
     const currentDialog = useSelector( (state:{dialog:DialogState}) => state.dialog.currentDialog)
     const selectedUser = useSelector( (state:{dialog:DialogState}) => state.dialog.selectedUser)
-    const me = useSelector( (state:{user:UserState}) => state.user.data)
-
-
+    const user = useSelector( (state:{user:UserState}) => state.user.data)
 
     const dispatch = useDispatch()
 
@@ -34,10 +32,9 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(fetchDialogs())
-        // socket.on('SERVER:MESSAGES_READED', (data:any) =>{dispatch(fetchDialogs())});
     }, [])
 
-    if(!me){
+    if(!user){
         return <></>
     }
     return(

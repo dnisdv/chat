@@ -49,6 +49,7 @@ const createRoutes = (app: express.Express, io: socket.Server) => {
   app.post("/messages", uploadImageMiddleware ,  MessageController.create);
   app.delete("/messages",  MessageController.delete);
   app.post("/messagevoice", uploadRecord, MessageController.createVoiceMessage)
+  app.delete("/messages/clearhistory", MessageController.clearHistory)
 
 };
 

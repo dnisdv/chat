@@ -6,6 +6,8 @@ export const Wrapper = styled.div`
     padding:10px 32px 10px 12px;
     position:relative;
     cursor:pointer;
+    overflow:hidden;
+    width:150px;
 `
 
 export const Controls = styled.div`

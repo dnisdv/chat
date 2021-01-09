@@ -83,6 +83,16 @@ const ChatInput = ({
 }:ChatInputProps) => {
     return (
         <Wrapper>
+            {EmojiStatus ? 
+                <Picker set='apple'
+                style={{
+                    zIndex:9909,
+                    right:"0px",
+                    bottom:"90%",
+                    position:"absolute"
+                }}
+                onClick={selectEmoji}  />
+            : ""}
         <PreviewsAttach>
             {AttachmentImages ? AttachmentImages.map( (i:AttachmentImagesType) => {
                 return (
@@ -95,6 +105,7 @@ const ChatInput = ({
         </PreviewsAttach>
 
         <ChatWrapper>
+            
                 <LeftColumn>
                     {isRecording ? 
                         <RecordingWrapper>
@@ -102,7 +113,6 @@ const ChatInput = ({
                             <RecordingIcon />
                             <RecordTitle>Recording...</RecordTitle>
                         </RecordingWrapper> : ""}
-                        <PerfectScrollbar>
                             <InputText
                                 onKeyDownCapture={KeyPressHandle}
                                 ref={textAreaRef} 
@@ -110,7 +120,6 @@ const ChatInput = ({
                                 onChange={changeInputValue} 
                                 value={isRecording ? "" : inputValue} 
                                 placeholder={isRecording ? "" :"Type your message"} />
-                        </PerfectScrollbar>
                 </LeftColumn>
                 <Controls>
                     {inputValue && inputValue.length > 0 ? "" : 
@@ -120,15 +129,6 @@ const ChatInput = ({
 
                     <EmojiControl >
                         <EmojiImg onClick={toogleEmojiOpen} src={EmojiIcon}  />
-                        {EmojiStatus ? 
-                                <Picker set='apple'
-                                onClick={selectEmoji}
-                                style={{ 
-                                    position: 'absolute',
-                                    bottom:"100%",
-                                    right:0,
-                                }}  />
-                            : ""}
                     </EmojiControl>
 
                     <AttachmentWrapper style={{opacity: AttachmentImages.length >= 12 ? 0.5: 1}} >

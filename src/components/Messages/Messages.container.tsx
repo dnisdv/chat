@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import MessagesComponent from './Messages'
-import { getMessages, add_message, messageUpdateReadStatus } from '../../redux/messages/actions'
+import { getMessages, add_message, messageUpdateReadStatus, messageUpdateReadStatus2 } from '../../redux/messages/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { DialogState } from '../../redux/dialogs/types'
 import { MessageType, messageState } from '../../redux/messages/types'
@@ -36,18 +36,17 @@ const Messages = () => {
       useEffect(() => {
         const AddMessage = (Message:any) => {
             dispatch(add_message(Message))
-            currentDialog && 
-            dispatch(messageUpdateReadStatus({userId:me?._id, dialogId:currentDialog._id }))
         };
         socket.on('SERVER:NEW_MESSAGE', AddMessage);
         socket.on('SERVER:MESSAGES_READED', (data:any) =>{
-            dispatch(messageUpdateReadStatus(data))
+            if(me){
+                if(data.userId !== me._id){
+                    dispatch(messageUpdateReadStatus(data))
+                }
+            }
          });
-        socket.emit("updateNotReadCount", {userId: me?._id, dialogId:currentDialog?._id} )
 
         return () => socket.removeListener('SERVER:NEW_MESSAGE', AddMessage);
-    
-        
     }, [])
 
     useEffect(() => {

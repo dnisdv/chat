@@ -15,6 +15,9 @@ import { MessageWrapper,
 } from './Message.styled'
 import { formatDistance } from 'date-fns'
 import { enUS } from 'date-fns/locale'
+import { Emoji } from 'emoji-mart';
+import reactStringReplace from 'react-string-replace';
+
 
 export type IsMeProps = {
     isMe? :boolean
@@ -67,13 +70,21 @@ const Message = ({id, text, user, isMe, readed, attachments, audio, createdAt, i
                     })}</AttachmentsWrapper>
                     : ""}
 
-                    {audio ? <MessageAudio AudioUrl={"/" + audio.path} /> : text ? <MessageText>{text}</MessageText> : ""}
+                    {audio ? <MessageAudio AudioUrl={"/" + audio.path} /> : text ? <MessageText isMe={isMe}>
+
+                    {reactStringReplace(text, /:(.+?):/g, (match, i) => (
+                        <Emoji key={i} emoji={match} set="apple" size={18} />
+                    ))}
+                    </MessageText> : ""}
         
                     {isMe ? <ReadStatus >
                         {readed ? <ReadIcon src={ReadedIcon} width="16px" height="10px" /> : <ReadIcon src={CheckIcon} width="11px" height="8px" />}
                     </ReadStatus> : ""}
             </MessageBubble>
             {/* } */}
+            <TimeWrapper isMe={isMe} >
+                    {formatDistance(new Date(), new Date(), { addSuffix: true, locale: enUS })}
+            </TimeWrapper>
 
         </MessageWrapper>
     )   

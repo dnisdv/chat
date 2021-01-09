@@ -14,18 +14,12 @@ import socket from './core/socket'
 import { fetchDialogs } from './redux/dialogs/actions'
 
 const App: React.FC = () => {
-
   const dispatch = useDispatch()
   const isAuth = useSelector<RootState>((state:{user:UserState}) => state.user.isAuth)
 
   useEffect(() => {
     dispatch(fetch_User())
-
   }, []);
-
-  useEffect(() => {
-    // socket.on('SERVER:MESSAGES_READED', (data:any) =>{dispatch(fetchDialogs())});
-}, [])
 
 
   return (

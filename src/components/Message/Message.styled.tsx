@@ -41,9 +41,11 @@ export const MessageWrapper = styled.div<MessageWrapperProps>`
 }
 `
 
-export const MessageText = styled.span`
+export const MessageText = styled.span<{
+    isMe:boolean | undefined
+}>`
     line-height:130.2%;
-    padding:15px 50px 15px 12px;
+    padding:${({isMe}) => isMe ? "10px 33px 10px 12px" : "10px 12px 10px 12px" };
     font-size:14px;
     word-break: break-all;
     @media (min-width: 560px) {
@@ -81,7 +83,7 @@ export const TimeWrapper = styled.div<IsMeProps>`
     margin:${({isMe}) => isMe ? "0 0 0 auto" : "0 auto 0 0"};
     margin-top:12px;
     font-size: 13px;    
-    color:rgb(0,0,0,.2);
+    color:rgb(0,0,0,.5);
 `
 export const AttachmentImage = styled.img<AttachmentImageProps>`
     width: 100%;

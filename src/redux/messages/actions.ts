@@ -30,9 +30,7 @@ export const getMessages = (dialogId:string): ThunkAction<Promise<void>, {}, {},
               type:MESSAGES_SET,
               payload:res.data
           })
-          socket.emit("updateNotReadCount", {userId: meId, dialogId:currentDialog._id} )
       }).catch((e) => {
-              console.log(e)
       })
   }
 }
@@ -40,6 +38,7 @@ export const getMessages = (dialogId:string): ThunkAction<Promise<void>, {}, {},
 
 export const sendMessagetoDialog = (dialogId:string, text:string, attachments?:AttachmentImagesType[]): ThunkAction<Promise<void>, {}, {}, messagesAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, messagesAction>, getState:any): Promise<void> => {
+    const currentDialog = getState().dialog.currentDialog
 
       const formdata = new FormData()
 
@@ -49,10 +48,9 @@ export const sendMessagetoDialog = (dialogId:string, text:string, attachments?:A
       formdata.append("text", text)
       formdata.append("dialog_id", dialogId)
 
-      return axios.post("/messages",
-          formdata
-      ).then((res) => {
+      return axios.post("/messages",formdata).then((res) => {
       }).catch((e) => {
+
         console.log(e)
       })
   }
@@ -87,8 +85,38 @@ export const messageUpdateReadStatus: ActionCreator<ThunkAction<{}, messageState
                 userId,
                 dialogId: dialogId,
             }})
+            console.log({
+              userId,
+              dialogId
+            })
       }
-      socket.emit("updateNotReadCount", {userId: meId, dialogId:currentDialog._id} )
+      };
+    }
+  };
+};
+
+
+export const messageUpdateReadStatus2: ActionCreator<ThunkAction<{}, messageState, {}, messagesAction>> = (
+  {userId, dialogId}
+) : any => {
+
+  return (dispatch: Dispatch<messagesAction>, getState:any):  void => {
+    const meId = getState().user.data._id
+      if( userId !== meId){
+        const currentDialog = getState().dialog.currentDialog
+      if(currentDialog){
+        if (currentDialog._id === dialogId) {
+            dispatch({
+              type: MESSAGES_READED_STATUS,
+              payload: {
+                userId,
+                dialogId: dialogId,
+            }})
+            console.log({
+              userId,
+              dialogId
+            })
+      }
       };
     }
   };
@@ -120,14 +148,13 @@ export const add_message: ActionCreator<ThunkAction<{}, messageState, {}, any>> 
     const meId = getState().user.data._id
 
     const currentDialog = getState().dialog.currentDialog
-    // @ts-ignore
     if(currentDialog){
       if (currentDialog._id === message.dialog._id) {
-
         dispatch({
           type: MESSAGES_ADD,
           payload: message
         })
+
         socket.emit("udateReadStatus", {userId: meId, dialogId:currentDialog._id})
       }
     }

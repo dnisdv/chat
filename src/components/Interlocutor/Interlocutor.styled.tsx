@@ -9,8 +9,9 @@ export const Wrapper = styled.div`
     padding:10px 34px;
     box-sizing:border-box;
     @media (max-width: 732px) {
-        padding-top:5px;
         padding: 0px 5px;
+        padding-top:10px;
+
     };
 `
 
@@ -19,8 +20,8 @@ export const Title = styled.h2`
     font-size:20px;
     @media (max-width: 732px) {
         font-size:16px;
+        margin-left:5px;
     }
-    
 `
 export const Menu = styled.div` 
 
@@ -61,6 +62,7 @@ export const MenuItem = styled.li`
 export const RightSide = styled.div`
     display:flex;
     align-items:center;
+    margin-right:10px;
 `
 
 export const MenuImgWrapper = styled.div`
@@ -100,11 +102,13 @@ export const BackArrowImage = styled.img`
     };
 `
 export const LastSeen = styled.div`
-    font-size:16px;
+    font-size:15px;
     color: rgb(0,0,0,0.5);
     margin-top:5px;
+
     @media (max-width: 732px) {
         font-size:12px;
+        margin-left:5px;
     }
 `
 export const OnlineStatus = styled(LastSeen)`

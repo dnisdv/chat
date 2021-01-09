@@ -17,7 +17,6 @@ export const SwitchParagraph = styled.p`
     }
 `
 
-
 export const Form = styled.form`
     display:flex;
     flex-direction:column;
@@ -161,6 +160,9 @@ export const ErrorFeedback = styled.span`
     top:50%;
     transform:translateY(-50%) translateX(100%) ;
     right:-20px;
+    @media (max-width: 919px) {
+        position:relative;
+    }
 `
 
 export const ServerErrorFeedback = styled.span`
@@ -169,4 +171,3 @@ export const ServerErrorFeedback = styled.span`
     display:block;
     margin-top:10px;
 `
-// export const 

@@ -21,6 +21,9 @@ import SoundVawe from '../../Assets/img/sound-waves.svg'
 import { getHours, getMinutes, formatDistanceStrict, isToday } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 import { Dialog as DialogType } from '../../redux/dialogs/types'
+import reactStringReplace from 'react-string-replace';
+import { Emoji } from 'emoji-mart';
+
 
 const formateDate = (date:string) => {
     const parseddate = Date.parse(date)
@@ -68,7 +71,7 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
     return(
         <Wrapper onClick={() => onClick && onClick(dialog)} active={active}>
             <Avatar 
-                size={60} 
+                size={50} 
                 srcImage={user.avatar ? user.avatar.path : ""} 
                 isOnline={user.isOnline}
                 user={{
@@ -103,7 +106,10 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
                         {!lastMessage ? "Error":
                             lastMessage.audio ? <LastMessageAudio src={SoundVawe} /> : 
                             lastMessage.attachments && lastMessage.attachments.length > 0  ? <LastMessageImage src={imagePlaceholder} /> :
-                            lastMessage.message
+
+                            reactStringReplace(lastMessage.message, /:(.+?):/g, (match, i) => (
+                                <Emoji key={i} emoji={match} set="apple" size={18} />
+                            ))
                         }
                         </LastMessage>
                     : ""}

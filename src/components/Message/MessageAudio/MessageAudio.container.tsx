@@ -11,11 +11,11 @@ export interface MouseClickEvent extends React.MouseEvent<HTMLDivElement> {
 
 
 const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
-    const audioElem = useRef<HTMLAudioElement>(document.createElement("audio"));
+    const audioElem = useRef<HTMLAudioElement | any>(null);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
-    const [restDuration, setrestDuration] = useState<string>("")
-  
+    const [restDuration, setrestDuration] = useState<string>("");
+
     const togglePlay = () => {
       if (!isPlaying) {
             audioElem.current.play();
@@ -26,9 +26,9 @@ const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
 
 
     const changeCurrentTime = (e:MouseClickEvent) =>{
-      if(   e.target.className.includes("Control_Wrapper") ||
-            e.target.className.includes("Control_Img") || 
-            e.target.className.includes("Wave")){
+      if(e.target.className.includes("Control_Wrapper") || 
+         e.target.className.includes("Control_Img") || 
+         e.target.className.includes("Wave")){
           return 
       }else{
         const RectLeft = e.currentTarget.getBoundingClientRect().left

@@ -162,14 +162,14 @@ class DialogController {
   delete = async (req: any, res: express.Response): Promise<void> => {
     try{
       const id: string = req.params.id;
-      const dialog = DialogModel.findOneAndRemove({ _id: id })
-
+      const dialog = await DialogModel.findOneAndRemove({ _id: id })
+      await MessageModel.deleteMany({dialog: id})
       if(dialog){
-        res.send({
+        res.status(200).send({
           message: `Dialog deleted`,
         });
       }else{
-        res.send({
+        res.status(200).send({
           message: `Dialog not found`,
         });
       }

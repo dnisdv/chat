@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
     z-index:99999999;
     top:50px;
     max-width:475px;
-    // min-width:419px;
     width:80vw;
     left:50%;
     transform: translateX(-50%);

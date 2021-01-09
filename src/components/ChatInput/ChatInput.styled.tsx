@@ -1,10 +1,11 @@
 import styled, {keyframes} from 'styled-components'
 
 export const Wrapper = styled.div`
-    padding:24px 34px;
+    margin:24px 34px;
     padding-top:14px;
+    position:relative;
     @media (max-width: 732px) {
-        padding:0;
+        margin:0;
     }
 `
 export const ChatWrapper = styled.div`
@@ -26,6 +27,7 @@ export const InputText = styled.textarea`
     max-height:250px;
     resize:none;
     font-family:inherit;
+    display:block;
     &:focus-visible{
         outline:none;
     }
@@ -65,6 +67,15 @@ export const EmojiControl = styled.div`
     align-items:center;
     margin-right:15px;
     padding:4px 5px 2px 5px;
+    & > section {
+        position:absolute;
+        bottom:100%;
+        right:0;
+        @media (max-width: 732px) {
+            right:-20px;
+        };
+    }
+    
 `
 
 export const AttachmentWrapper = styled.div`

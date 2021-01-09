@@ -5,7 +5,6 @@ const fs = require("fs")
 
 export const imageStorage = multer.diskStorage({
     destination: function (req:any, _:any, callback:any) {
-      console.log(_)
       const topdir = "./uploads";
       var dir = `./uploads/${req.ui}`;
       try {
@@ -25,11 +24,11 @@ export const imageStorage = multer.diskStorage({
       callback(null, dir);
     },
     filename: function (_:any, file:any, callback:any) {
-      let name = file.originalname + "." + "jpg"
+      let name = file.originalname +  Date.now() + "." + "jpg"
       if (file.mimetype === "image/jpeg") {
-        name = file.originalname + "." + "jpg";
+        name = file.originalname +  Date.now() + "." + "jpg";
       } else if (file.mimetype === "image/png") {
-        name = file.originalname + "." + "png";
+        name = file.originalname +  Date.now() + "." + "png";
       }
       callback(null, name);
     },
@@ -89,9 +88,9 @@ export const imageStorage = multer.diskStorage({
       
       let name = file.originalname + "." + "jpg"
       if (file.mimetype === "image/jpeg") {
-        name = file.originalname + "." + "jpg";
+        name = file.originalname  + Date.now() + "." + "jpg";
       } else if (file.mimetype === "image/png") {
-        name = file.originalname + "." + "png";
+        name = file.originalname + Date.now() + "." + "png";
       }
       
       callback(null, name);

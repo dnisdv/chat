@@ -99,6 +99,7 @@ const ChatInput = () => {
         }else{
             setInputValue("")
         }
+        setEmojiStatus(false)
     }
     const KeyPressHandle = (e:React.KeyboardEvent<HTMLTextAreaElement>) => {
         if(currentDialog && me){

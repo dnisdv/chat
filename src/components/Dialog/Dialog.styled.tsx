@@ -12,8 +12,11 @@ export const Wrapper = styled.div<WrapperProps>`
     padding:12px 24px 12px 24px;
     &:hover{
         background-color:#F3F3F3;
-    }
-
+    };
+    @media (max-width: 732px) {
+        padding:5px 15px 0px 5px;
+        padding-right:15px;
+    };
 `
 
 export const DialogData = styled.div`
@@ -51,7 +54,7 @@ export const LastMessage = styled.p`
     white-space: nowrap;
     max-width:100%;
     margin-right:10px;
-    display:flex;
+    display:block;
 `
 
 export const LastMessageImage = styled.img`

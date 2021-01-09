@@ -3,7 +3,8 @@ import InterlocutorComponent from './Interlocutor'
 import { useSelector, useDispatch } from 'react-redux'
 import { DialogState } from "../../redux/dialogs/types"
 import { UserState } from '../../redux/user/types'
-import { resetCurrentDialog } from '../../redux/dialogs/actions'
+import { resetCurrentDialog, removeDialog } from '../../redux/dialogs/actions'
+import { clearMessages } from '../../redux/messages/actions'
 
 const Interlocutor = () => {
     const [menuStatus, setmenuStatus] = useState<boolean>(false)
@@ -12,14 +13,9 @@ const Interlocutor = () => {
     const currentDialog = useSelector((state: {dialog:DialogState}) => state.dialog.currentDialog)
     const dispatch = useDispatch()
 
-    const onClearHistory = () => {
-        console.log("CLEAR HISTORY")
-    }
-    const onBlockUser = () => {
-        console.log("BLOCK USER")
-    }
     const onDeleteChat = () => {
-        console.log("DELETE CHAT")
+        currentDialog && dispatch(removeDialog(currentDialog._id))
+        currentDialog && dispatch(clearMessages())
     }
     const toggleMenu = () => {
         setmenuStatus( prevProps => !prevProps)
@@ -43,12 +39,10 @@ const Interlocutor = () => {
             }}
             toggleMenu={toggleMenu}
             isMenuOpen={menuStatus}
-            clearHistory={onClearHistory}
-            blockUser={onBlockUser}
             deleteChat={onDeleteChat}
         />)
     }
-    if( currentDialog ){
+    if( currentDialog && me ){
         const user = me?._id === currentDialog.partner._id ? currentDialog.author : currentDialog.partner;
         return(
             <InterlocutorComponent
@@ -63,8 +57,6 @@ const Interlocutor = () => {
                 }}
                 toggleMenu={toggleMenu}
                 isMenuOpen={menuStatus}
-                clearHistory={onClearHistory}
-                blockUser={onBlockUser}
                 deleteChat={onDeleteChat}
             />
         )

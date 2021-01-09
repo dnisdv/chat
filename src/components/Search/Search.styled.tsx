@@ -29,13 +29,13 @@ const Fade = keyframes`
 
 export const SearchIMG = styled.img`
     position:absolute;
-    width:18px;
-    height:18px;
+    width:15px;
+    height:15px;
     position:absolute;
     top:50%;
     transform:translateY(-50%);
     right:18px;
-    opacity:0.7;
+    opacity:0.5;
     transition:0.2s;
     animation-name: ${Fade};
     animation-duration: 1s;

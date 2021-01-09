@@ -54,6 +54,7 @@ export const Actions = styled.div`
     justify-content:space-between;
     align-items:center;
     margin-top:40px;
+    flex-direction:row-reverse;
 `
 
 export const Background = styled.div`
@@ -63,4 +64,9 @@ export const Background = styled.div`
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
+`
+
+export const ErrorFeedback = styled.span`
+    font-size:12px;
+    color:red;
 `

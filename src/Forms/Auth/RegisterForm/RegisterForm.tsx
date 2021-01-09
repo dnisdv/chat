@@ -24,9 +24,16 @@ import {name, at, email, password} from '../Assets'
 const SignupSchema = yup.object().shape({
   username: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().required(),
-  firstname: yup.string().required(),
-  lastname: yup.string().required(),
+  firstname: yup.string().min(3).required(),
+  lastname: yup.string().min(3).required(),
+  password: yup.string().min(3).required(),
+  password_confirm: yup.mixed().test(
+    "match",
+    "Passwords do not match", 
+    function () {
+      return this.parent.password === this.parent.password_confirm;
+    }
+  )
 });
 
 const RegisterForm = () => {
@@ -35,7 +42,7 @@ const RegisterForm = () => {
   const registerError = useSelector( (state: {user: UserState}) => state.user.errors.register)
     return(
         <Formik
-          initialValues={{ firstname:'', lastname:'', username:'', email: '', password: '' }}
+          initialValues={{ firstname:'', lastname:'', username:'', email: '', password: '', password_confirm: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
             dispatch(User_Register({
@@ -131,6 +138,20 @@ const RegisterForm = () => {
                     />
                     <FormInputLabel htmlFor="registerformpassword" >Password</FormInputLabel>
                     {errors.password && touched.password && <ErrorFeedback>{errors.password}</ErrorFeedback>}
+                </FormInputWrapper>
+
+                <FormInputWrapper>
+                    <InputImage src={password} width="20px" height="20px" alt="password" />
+                    <FormInput
+                        type="password"
+                        name="password_confirm"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password_confirm}
+                        id="registerformpassword_confirm"
+                    />
+                    <FormInputLabel htmlFor="registerformpassword_confirm" >Password confirm</FormInputLabel>
+                    {errors.password_confirm && touched.password_confirm && <ErrorFeedback>{errors.password_confirm}</ErrorFeedback>}
                 </FormInputWrapper>
                 
                 <FormSubmit type="submit" disabled={isSubmitting}>

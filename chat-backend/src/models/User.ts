@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 const { isEmail } = require("validator");
 import { generatePasswordHash } from "../utils";
+// @ts-ignore
 import {differenceInMinutes, parseISO} from "date-fns";
 
 export interface IUser extends Document {
@@ -67,7 +68,9 @@ const UserSchema: Schema = new Schema(
 );
 
 UserSchema.virtual("isOnline").get(function (this: any) {
-  return differenceInMinutes(new Date(), parseISO(this.last_seen)) < 5;
+  // @ ts-ignore
+  return differenceInMinutes(Date.now(), this.last_seen) < 5;
+  // return differenceInMinutes(new Date(), parseISO(this.last_seen)) < 5;
 });
 
 UserSchema.set("toJSON", {

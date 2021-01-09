@@ -8,7 +8,7 @@ export const FormWrapper = styled.div`
     width: 100%;
     margin:0 auto;
     padding: 0px 15px;
-    margin-top:10%;
+    margin-top:5%;
     box-sizing: border-box;
     @media (max-width: 732px) {
 

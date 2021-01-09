@@ -10,7 +10,8 @@ import {
     Background,
     Description,
     Actions,
-    CancelButton
+    CancelButton,
+    ErrorFeedback
 } from './UpdateForm.styled'
 import {UpdateItems} from '../Settings.container'
 import { useSelector, useDispatch } from "react-redux"
@@ -32,11 +33,13 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
         description: "Here you can upadate your main credentials:",
         inputs:[
         {
+          id:1,
           current: user?.firstname,
           name:"firstname",
           placeholder:"Enter new firstname"
         },
         {
+          id:2,
           current: user?.lastname,
           name:"lastname",
           placeholder:"Enter new lastname"
@@ -52,6 +55,7 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
         description: "Here you can upadate your username:",
         inputs:[
           {
+            id:1,
             current: user?.username,
             name:"username",
             placeholder:"Enter new username"
@@ -66,6 +70,7 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
         description: "Here you can upadate your email:",
         inputs:[
           {
+            id:1,
             current: user?.email,
             name:"email",
             placeholder:"Enter new email"
@@ -79,6 +84,7 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
         title:"About Me",
         description: "Here you put some information about you:",
         inputs:[{
+          id:1,
           current: user?.bio,
           name:"bio",
           placeholder:"Say something about you"
@@ -101,6 +107,7 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
         onSubmit={(values, { setSubmitting }) => { 
           dispatch(User_Update(values))
           closeSettingItem()
+          setSubmitting(false)
         }}
       >
         {({
@@ -119,21 +126,24 @@ const UpdateForm = ({name, closeSettingItem}:UpdateFormProps) => {
                 <Form autoComplete="off" onSubmit={handleSubmit}>
                   {data.inputs.map( (i) => {
                     return (
-                    <Input 
+                      <React.Fragment key={i.id}>
+                    <Input key={i.id}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      // @ts-ignore
                       value={values[i.name]}
                       type="text" 
                       name={i.name} 
                       placeholder={i.placeholder} 
-                    />)
+                    />
+                    {errors[i.name] && touched[i.name] && <ErrorFeedback >* {errors[i.name]}</ErrorFeedback>}
+                    </React.Fragment>
+                    )
 
                   })}
-                    <Actions>
-                      <CancelButton onClick={closeSettingItem}>Cancel</CancelButton>
-                      <ConfirmButton type="submit" >Update</ConfirmButton>
-                    </Actions>
+                  <Actions>
+                    <ConfirmButton type="submit" >Update</ConfirmButton>
+                    <CancelButton onClick={closeSettingItem}>Cancel</CancelButton>
+                  </Actions>
                 </Form>
             </Wrapper>
           </Background>

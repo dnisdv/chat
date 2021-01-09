@@ -9,8 +9,7 @@ export const Wrapper = styled.div`
     width:100%;
     padding:0 10px;
     box-sizing: border-box;
-    @media (max-width: 732px) {
-    };
+
 `
 
 export const SideMenu = styled.div<{
@@ -28,7 +27,6 @@ export const SideMenu = styled.div<{
         max-width:100%;
         width:100%;
         padding:10px 5px;
-
     }
 `
 export const MessagesWrapper = styled.div`

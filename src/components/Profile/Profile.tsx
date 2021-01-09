@@ -37,6 +37,7 @@ const Profile = ({
     return(
         <Wrapper>
             <Avatar 
+                isOnline={true}
                 size={50} 
                 srcImage={user.avatar ? user.avatar.path : ""} 
                 user={{

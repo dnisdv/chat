@@ -18,8 +18,6 @@ export const Base = Template.bind({});
 Base.args = {
     toggleMenu: () => {},
     isMenuOpen:false,
-    clearHistory: (e:React.MouseEvent<HTMLLIElement>) => {},
-    blockUser: (e:React.MouseEvent<HTMLLIElement>) => {},
     deleteChat: (e:React.MouseEvent<HTMLLIElement>) => {},
     // user:{
     //     firstname:"uh oh buh",

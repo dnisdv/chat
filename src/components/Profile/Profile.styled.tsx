@@ -30,8 +30,9 @@ export const Username = styled.p`
 export const EditIMGwrapper = styled.div`
     margin-left:auto;
     cursor:pointer;
+    margin-right:15px;
 `
 export const EditIMG = styled.img`
-    width:19px;
-    height:19px;
+    width:15px;
+    height:15px;
 `

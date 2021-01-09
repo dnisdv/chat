@@ -146,4 +146,17 @@ export const resetCurrentDialog: ActionCreator<ThunkAction<{}, DialogState, {}, 
   };
 };
   
-  
+export const removeDialog = (
+  dialogId:string
+): ThunkAction<Promise<void>, {}, {}, DialogActionTypes> => {
+  return async (dispatch: ThunkDispatch<{}, {}, DialogActionTypes>): Promise<void> => {
+      return axios.delete(`/dialogs/${dialogId}`).then((res) => {
+        dispatch({
+            type: DIALOG_RESET_CURRENT
+        });
+        dispatch(fetchDialogs())
+      }).catch((e) => {
+          console.log(e)
+      })
+  }
+}

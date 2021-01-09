@@ -29,7 +29,6 @@ export default (state = initialState, action: DialogActionTypes): DialogState =>
           return{
             ...state,
             currentDialog:action.payload,
-            // selectedUser:null,
           }
         case DIALOGS_SET:
           return{
@@ -50,7 +49,6 @@ export default (state = initialState, action: DialogActionTypes): DialogState =>
           return{
             ...state,
             selectedUser:action.payload,
-            // currentDialog:null
           }
         case DIALOGS_CLEAR_FOUND :
           return{
@@ -62,6 +60,16 @@ export default (state = initialState, action: DialogActionTypes): DialogState =>
               ...state,
               selectedUser:null,
               currentDialog:null
+            }
+          case DIALOG_SET_NOTREADCOUNT :
+            return{
+              ...state,
+              items : state.items.map((i:Dialog) => {
+                  if(i._id === action.payload.dialogId){
+                    i.notReadedCount = action.payload.count
+                  }
+                  return i
+              })
             }
     default:
       return state;

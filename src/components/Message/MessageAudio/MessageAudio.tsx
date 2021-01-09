@@ -25,11 +25,10 @@ const MessageAudio = ({
   isPlaying,
   restDuration
 }:MessageAudioProps) => { 
-    
     return(
         <Wrapper onClick={changeCurrentTime}>
             <ProgressBar style={{width: audioElem.current ? (currentTime +.25)/audioElem.current.duration*100 + "%": "auto"} } />
-            <audio ref={audioElem} src={AudioUrl} preload="auto"  />
+            <audio ref={audioElem} src={AudioUrl} preload="auto" />
             <Controls className="Control_Wrapper" onClick={togglePlay}>
                 <ControlImg className="Control_Img" src={isPlaying ? PauseIcon : PlayIcon} alt="playIcon"/>
             </Controls>

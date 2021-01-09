@@ -13,17 +13,23 @@ const Dialogs = () => {
     const me = useSelector((state:{user:UserState}) => state.user.data)
 
     useEffect(() => {
+        const readcount = ({dialogId, count}:any) => {
+            dispatch(setDialogNotReadCount(dialogId, count))
+        }
+        const newMessage = (data:any) => {
+            if(me && data.dialog.author === me._id || me && data.dialog.partner === me._id){
+                dispatch(fetchDialogs())
+            }
+        }
         socket.on('SERVER:DIALOG_CREATED', () => dispatch(fetchDialogs()));
-        socket.on('SERVER:NEW_MESSAGE', () => dispatch(fetchDialogs()));
-        socket.on('SERVER:MESSAGES_READED', () =>{dispatch(fetchDialogs())});
-        socket.on('SERVER:MESSAGES_NOT_READED_COUNT', ({dialogId}:any) => {
-            dispatch(setDialogNotReadCount(dialogId, 0))
-        })
+        socket.on('SERVER:NEW_MESSAGE', newMessage)
+        socket.on('SERVER:MESSAGES_NOT_READED_COUNT', readcount)
         
         return () => {
           socket.removeListener('SERVER:DIALOG_CREATED', () => dispatch(fetchDialogs()));
           socket.removeListener('SERVER:MESSAGES_READED', () =>{dispatch(fetchDialogs())});
-          socket.removeListener('SERVER:NEW_MESSAGE', () => dispatch(fetchDialogs()));
+          socket.removeListener('SERVER:NEW_MESSAGE', newMessage);
+          socket.removeListener('SERVER:MESSAGES_NOT_READED_COUNT', readcount)
         };
     }, []);
 
@@ -44,7 +50,8 @@ const Dialogs = () => {
                         date:i.lastMessage.createdAt,
                         fromMe:i.lastMessage.user._id === me._id,
                         audio:i.lastMessage.audio,
-                        attachments:i.lastMessage.attachments
+                        attachments:i.lastMessage.attachments,
+                        user:i.lastMessage.user
                     }
                 }
 

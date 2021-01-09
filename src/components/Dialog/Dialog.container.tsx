@@ -22,19 +22,16 @@ const Dialog = (props:DialogProps) => {
         clearInterval(typingTimeoutId);
         typingTimeoutId = setTimeout(() => {
           setIsTyping(false);
-        }, 3000);
+        }, 1000);
       };
 
     useEffect(() => {
         socket.on('DIALOGS:TYPING', ({dialogId, userId}:any) => {
-                if(props.dialog._id === dialogId && me?._id !== userId){
-                    toggleIsTyping();
-                }
+            if(props.dialog._id === dialogId && me?._id !== userId){
+                toggleIsTyping();
+            }
         });
     }, [])
-    useEffect(() => {
-        socket.emit("updateNotReadCount", {userId: me?._id, dialogId:currentDialog?._id} )
-    }, [currentDialog])
     return(
         <DialogComponent 
             isTyping={isTyping}
