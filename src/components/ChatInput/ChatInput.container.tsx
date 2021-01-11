@@ -2,8 +2,8 @@ import React,{useRef, useState} from 'react'
 import ChatInputComponent, {AttachmentImagesType} from './ChatInput'
 import {useSelector, useDispatch} from 'react-redux'
 import {DialogState} from '../../redux/dialogs/types'
-import { createDialogs_sendMessage, createDialogs_sendVoiceRecord } from '../../redux/dialogs/actions'
-import { sendMessagetoDialog, sendVoiceRecord } from '../../redux/messages/actions'
+import { createDialogs_sendMessage } from '../../redux/dialogs/actions'
+import { sendMessagetoDialog } from '../../redux/messages/actions'
 import socket from '../../core/socket'
 import { UserState } from '../../redux/user/types'
 
@@ -44,14 +44,7 @@ const ChatInput = () => {
         autoResize(e)
     }
 
-    const onRecord = (blob:Blob) => {
-        if(selectedUser){
-            dispatch(createDialogs_sendVoiceRecord(blob, selectedUser._id))
-        }
-        else if(currentDialog){
-            dispatch(sendVoiceRecord(blob, currentDialog._id));
-        }
-    }
+
 
     const uploadAttachmentHandle = (e:EventTargetFiles) => {
         if (e.target.files && e.target.files[0]) {
@@ -146,7 +139,6 @@ const ChatInput = () => {
             inputValue={InputValue}
             PassedTimeFormat={PassedTimeFormat}
             uploadAttachmentHandle={uploadAttachmentHandle}
-            onRecord={onRecord}
             setisRecording={setisRecording}
             setpassedTime={setpassedTime}
             textAreaRef={textAreaRef}

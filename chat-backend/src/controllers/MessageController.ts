@@ -3,10 +3,7 @@ import socket from "socket.io";
 
 import { MessageModel, DialogModel } from "../models";
 import { IDialog } from "../models/Dialog";
-// @ts-ignore
 import { IMessage } from "../models/Message";
-// import { IDialog } from '../models/Dialog'
-import * as mm from 'music-metadata';
 
 class MessageController {
   io: socket.Server;
@@ -113,63 +110,6 @@ class MessageController {
     }catch(e){
       return res.status(500).send(e)
     }
-  };
-
-  createVoiceMessage = async (req:any, res:express.Response) => {
-    mm.parseFile(req.file.path).then((metadata:any) => {
-      // Do great things with the metadata
-      console.log(metadata)
-    })
-
-
-    const userId: string = req.user._id;
-
-    const postData = {
-      dialog: req.body.dialog_id,
-      audio: req.file ? req.file : null,
-      user: userId,
-    };
-    
-    const message = new MessageModel(postData);
-
-    console.log(req.file)
-    // this.updateReadStatus(res, userId, req.body.dialog_id);
-
-    message
-      .save()
-      .then((obj: IMessage) => {
-        obj.populate(
-          "dialog user",
-          (err: any, message: IMessage) => {
-            if (err) {
-              return res.status(500).json({
-                status: "error",
-                message: err,
-              });
-            }
-
-            DialogModel.findOneAndUpdate(
-              { _id: postData.dialog },
-              { lastMessage: message._id },
-              { upsert: true },
-              function (err) {
-                if (err) {
-                  return res.status(500).json({
-                    status: "error",
-                    message: err,
-                  });
-                }
-              }
-            );
-            res.json(message);
-
-            this.io.emit("SERVER:NEW_MESSAGE", message);
-          }
-        );
-      })
-      .catch((reason) => {
-        res.json(reason);
-      });
   };
 
   clearHistory = async (req :any, res:express.Response) => {

@@ -51,7 +51,6 @@ const Messages = ({items, loading=false, isTyping, currentDialog, user}: Message
                                     attachments={i.attachments}
                                     readed={i.readed}
                                     text={i.text}
-                                    audio={i.audio}
                                     createdAt={i.createdAt}
                                 />
                             </MessageWrapper>

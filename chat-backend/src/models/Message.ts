@@ -35,15 +35,7 @@ const MessageSchema = new Schema(
       }
     }
   ],
-  audio:{
-    path:{
-      type:String,
-    },
-    filename:{
-      type: String
-    }
-  }
-  },
+},
   {
     timestamps: true,
     usePushEach: true,

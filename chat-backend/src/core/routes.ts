@@ -5,7 +5,7 @@ import { checkAuth } from "../middlewares";
 import { loginValidation, registerValidation } from "../utils/validations";
 const path = require("path");
 import updateLastSeen from '../middlewares/updateLastSeen'
-import { uploadImageMiddleware, uploadRecord, uploadAvatar } from '../utils/multer'
+import { uploadImageMiddleware, uploadAvatar } from '../utils/multer'
 import {
   UserCtrl,
   DialogCtrl,
@@ -43,12 +43,11 @@ const createRoutes = (app: express.Express, io: socket.Server) => {
   app.get("/dialogs",  DialogController.index);
   app.delete("/dialogs/:id", DialogController.delete);
   app.post("/dialogs", uploadImageMiddleware, DialogController.create);
-  app.post("/dialogs/voice", uploadRecord, DialogController.createVoiceMessage)
+  app.post("/dialogs/voice", DialogController.createVoiceMessage)
 
   app.get("/messages", MessageController.index);
   app.post("/messages", uploadImageMiddleware ,  MessageController.create);
   app.delete("/messages",  MessageController.delete);
-  app.post("/messagevoice", uploadRecord, MessageController.createVoiceMessage)
   app.delete("/messages/clearhistory", MessageController.clearHistory)
 
 };

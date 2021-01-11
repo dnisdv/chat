@@ -27,7 +27,6 @@ import SendIcon from './Assets/Send.svg'
 import AttachmentIcon from './Assets/Attachment.svg'
 import DeleteIcon from './Assets/remove.svg'
 import { Picker } from 'emoji-mart'
-import Recorder from './Recorder/Recorder'
 import {EventTargetFiles} from './ChatInput.container'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -54,7 +53,6 @@ export type ChatInputProps = {
     uploadAttachmentHandle:(e:EventTargetFiles) => void,
     selectEmoji:(data:any) => void,
     inputValue:string,
-    onRecord:(blob:Blob) => void,
     PassedTimeFormat:() => string,
     setisRecording:React.Dispatch<React.SetStateAction<boolean>>,
     setpassedTime:React.Dispatch<React.SetStateAction<number>>,
@@ -75,7 +73,6 @@ const ChatInput = ({
     uploadAttachmentHandle,
     selectEmoji,
     inputValue,
-    onRecord,
     setisRecording,
     setpassedTime,
     textAreaRef,
@@ -107,12 +104,6 @@ const ChatInput = ({
         <ChatWrapper>
             
                 <LeftColumn>
-                    {isRecording ? 
-                        <RecordingWrapper>
-                            <RecordingTime>{recordingPassedTime()}</RecordingTime>
-                            <RecordingIcon />
-                            <RecordTitle>Recording...</RecordTitle>
-                        </RecordingWrapper> : ""}
                             <InputText
                                 onKeyDownCapture={KeyPressHandle}
                                 ref={textAreaRef} 
@@ -122,11 +113,6 @@ const ChatInput = ({
                                 placeholder={isRecording ? "" :"Type your message"} />
                 </LeftColumn>
                 <Controls>
-                    {inputValue && inputValue.length > 0 ? "" : 
-                        <Recorder setpassedTime={setpassedTime} setisRecording={setisRecording} isRecording={isRecording} succesRecord={onRecord} />
-                    }
-                    
-
                     <EmojiControl >
                         <EmojiImg onClick={toogleEmojiOpen} src={EmojiIcon}  />
                     </EmojiControl>

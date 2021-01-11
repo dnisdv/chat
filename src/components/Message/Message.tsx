@@ -2,7 +2,6 @@ import React from 'react'
 import Avatar from '../Avatar/Avatar'
 import CheckIcon from './assets/check.svg'
 import ReadedIcon from './assets/readed.svg'
-import MessageAudio from './MessageAudio/MessageAudio.container'
 import { MessageWrapper,
     MessageText,
     TimeWrapper,
@@ -40,17 +39,13 @@ export type MessageProps = {
         },
     },
     readed?:boolean,
-    audio?:{
-        filename:string,
-        path: string
-        },
     createdAt: string,
     isTyping?: boolean
 } & IsMeProps
 
 
 
-const Message = ({id, text, user, isMe, readed, attachments, audio, createdAt, isTyping}: MessageProps) => {
+const Message = ({text, user, isMe, readed, attachments, createdAt,}: MessageProps) => {
     return (
         <MessageWrapper isMe={isMe}>
             <AvatarWrapper isMe={isMe} className="Avatar_Wrapper">
@@ -70,7 +65,7 @@ const Message = ({id, text, user, isMe, readed, attachments, audio, createdAt, i
                     })}</AttachmentsWrapper>
                     : ""}
 
-                    {audio ? <MessageAudio AudioUrl={"/" + audio.path} /> : text ? <MessageText isMe={isMe}>
+                    {text ? <MessageText isMe={isMe}>
 
                     {reactStringReplace(text, /:(.+?):/g, (match, i) => (
                         <Emoji key={i} emoji={match} set="apple" size={18} />

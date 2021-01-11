@@ -21,10 +21,6 @@ export type MessageType = {
     user:Userdata,
     dialog:DialogType,
     createdAt:string,
-    audio:{
-        filename:string,
-        path:string
-    }
 }
 
 export type fetchMessagesAction = {

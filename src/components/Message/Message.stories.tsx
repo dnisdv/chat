@@ -36,22 +36,6 @@ Base.args = {
 };
 
 
-export const Audio = Template.bind({});
-Audio.args = {
-  isMe : true,
-  user: {
-    firstname:"Dwight",
-    lastname:"Schrute",
-    avatar:{
-      filename:"1",
-      path:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-    }  },
-  readed:false,
-  audio:{
-    filename:"Sample audio",
-    path: "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
-  }
-};
 
 export const Attachments = Template.bind({});
 Attachments.args = {

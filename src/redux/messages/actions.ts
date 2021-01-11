@@ -55,24 +55,6 @@ export const sendMessagetoDialog = (dialogId:string, text:string, attachments?:A
       })
   }
 }
-
-export const sendVoiceRecord = (blob:Blob, dialogId:string): ThunkAction<Promise<void>, {}, {}, messagesAction> => {
-  return async (dispatch: ThunkDispatch<{}, {}, messagesAction>): Promise<void> => {
-      const formdata = new FormData()
-      formdata.append("record", blob)
-      formdata.append("dialog_id", dialogId)
-
-      return axios.post("/messagevoice",formdata ,{
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      }).then((res) => {
-      }).catch((e) => {
-        console.log(e)
-      })
-  }
-}
-
 export const messageUpdateReadStatus: ActionCreator<ThunkAction<{}, messageState, {}, messagesAction>> = (
   {userId, dialogId}
 ) : any => {

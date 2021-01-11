@@ -104,25 +104,6 @@ export const createDialogs_sendMessage = (partner:string, text:string, attachmen
     }
 }
 
-export const createDialogs_sendVoiceRecord = (blob:Blob, partner:string): ThunkAction<Promise<void>, {}, {}, DialogActionTypes> => {
-  return async (dispatch: ThunkDispatch<{}, {}, DialogActionTypes>): Promise<void> => {
-    
-      const formdata = new FormData()
-      formdata.append("record", blob)
-      formdata.append("partner", partner)
-
-      return axios.post("/dialogs/voice",formdata).then((res) => {
-        dispatch(setCurrentDialog(res.data)) 
-        dispatch(fetchDialogs())
-        dispatch({
-          type: DIALOGS_SELECT_USER,
-          payload:null
-        });
-      }).catch((e) => {
-        console.log(e)
-      })
-  }
-}
 
 export const setDialogNotReadCount: ActionCreator<ThunkAction<{}, DialogState, {}, DialogActionTypes>> = (
   dialogId:string,count:number

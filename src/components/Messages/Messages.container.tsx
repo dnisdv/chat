@@ -83,7 +83,6 @@ const Messages = () => {
                             avatar:i.user.avatar
                         },
                         attachments:i.attachments,
-                        audio:i.audio,
                         readed:i.read,
                         isMe: i.user._id === me._id,
                         createdAt: i.createdAt,
