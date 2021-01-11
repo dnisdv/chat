@@ -62,7 +62,11 @@ export const sendVoiceRecord = (blob:Blob, dialogId:string): ThunkAction<Promise
       formdata.append("record", blob)
       formdata.append("dialog_id", dialogId)
 
-      return axios.post("/messagevoice",formdata).then((res) => {
+      return axios.post("/messagevoice",formdata ,{
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then((res) => {
       }).catch((e) => {
         console.log(e)
       })

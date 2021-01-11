@@ -102,7 +102,7 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
                     : 
                         lastMessage ? 
                         <LastMessage>
-                        {lastMessage.fromMe ? "You: ": ""}
+                        {lastMessage.fromMe ? <span>You: </span>: ""}
                         {!lastMessage ? "Error":
                             lastMessage.audio ? <LastMessageAudio src={SoundVawe} /> : 
                             lastMessage.attachments && lastMessage.attachments.length > 0  ? <LastMessageImage src={imagePlaceholder} /> :

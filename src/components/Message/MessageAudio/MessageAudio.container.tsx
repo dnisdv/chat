@@ -11,10 +11,10 @@ export interface MouseClickEvent extends React.MouseEvent<HTMLDivElement> {
 
 
 const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
-    const audioElem = useRef<HTMLAudioElement | any>(null);
+    const audioElem = useRef<HTMLAudioElement | any>(document.createElement("audio"));
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
-    const [restDuration, setrestDuration] = useState<string>("");
+    const [restDuration, setrestDuration] = useState<string>("")
 
     const togglePlay = () => {
       if (!isPlaying) {
@@ -38,7 +38,7 @@ const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
         setCurrentTime(audioElem.current.currentTime)
       }
   }
-  
+ 
     useEffect(() => {
       audioElem.current.addEventListener(
         'playing',
@@ -84,7 +84,7 @@ const MessageAudio = ({AudioUrl}:Pick<MessageAudioProps, "AudioUrl">) => {
 
     return(
         <MessageAudioComponent 
-            AudioUrl={AudioUrl}
+            AudioUrl={"http://localhost:3003" + AudioUrl}
             changeCurrentTime={changeCurrentTime}
             audioElem={audioElem}
             currentTime={currentTime}

@@ -24,7 +24,8 @@ const MessageAudio = ({
   togglePlay,
   isPlaying,
   restDuration
-}:MessageAudioProps) => { 
+}:MessageAudioProps) => {
+    console.log(audioElem.current.duration) 
     return(
         <Wrapper onClick={changeCurrentTime}>
             <ProgressBar style={{width: audioElem.current ? (currentTime +.25)/audioElem.current.duration*100 + "%": "auto"} } />

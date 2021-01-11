@@ -26,7 +26,6 @@ export default (http: http.Server) => {
         io.emit("SERVER:MESSAGES_NOT_READED_COUNT", {
           dialogId:data.dialogId,
           count:unreadCount
-
         });
     });
     socket.on("udateReadStatus", async (data:any) => {

@@ -6,6 +6,7 @@ import { IDialog } from "../models/Dialog";
 // @ts-ignore
 import { IMessage } from "../models/Message";
 // import { IDialog } from '../models/Dialog'
+import * as mm from 'music-metadata';
 
 class MessageController {
   io: socket.Server;
@@ -114,7 +115,13 @@ class MessageController {
     }
   };
 
-  createVoiceMessage = (req:any, res:express.Response) => {
+  createVoiceMessage = async (req:any, res:express.Response) => {
+    mm.parseFile(req.file.path).then((metadata:any) => {
+      // Do great things with the metadata
+      console.log(metadata)
+    })
+
+
     const userId: string = req.user._id;
 
     const postData = {
@@ -125,6 +132,7 @@ class MessageController {
     
     const message = new MessageModel(postData);
 
+    console.log(req.file)
     // this.updateReadStatus(res, userId, req.body.dialog_id);
 
     message

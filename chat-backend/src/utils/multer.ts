@@ -1,6 +1,8 @@
 import multer from "multer";
 const fs = require("fs")
 // import sharp from "sharp"
+// import * as mm from 'music-metadata';
+
 
 
 export const imageStorage = multer.diskStorage({
@@ -35,6 +37,8 @@ export const imageStorage = multer.diskStorage({
   });
   var uploadImage = multer({ dest: "./uploads", storage: imageStorage }).array("photos", 12);
   
+
+  // @ts-ignore
   const Recordstorage = multer.diskStorage({
     destination: function (_2:any, _:any, callback:any) {
       const topdir = "./record";
@@ -56,7 +60,9 @@ export const imageStorage = multer.diskStorage({
   
       callback(null, dir);
     },
-    filename: function (_:any, file:any, callback:any) {
+    filename:  async (_:any, file:any, callback:any) => {
+      // console.log(mm.parseFile(file))
+      // await mm.parseFile(file)
       let name = file.originalname +  Date.now() + "." + "mp3"
       callback(null, name);
     },

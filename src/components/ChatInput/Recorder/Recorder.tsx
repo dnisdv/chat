@@ -30,6 +30,23 @@ const Recorder = ({
                     setisRecording(false)
                     return mediaRecorder.stop()
                 }
+                function createAudioElement(blobUrl:any) {
+                    const downloadEl = document.createElement('a');
+                    // @ts-ignore
+                    downloadEl.style = 'display: block';
+                    downloadEl.innerHTML = 'download';
+                    downloadEl.download = 'audio.webm';
+                    downloadEl.href = blobUrl;
+                    const audioEl = document.createElement('audio');
+                    audioEl.controls = true;
+                    const sourceEl = document.createElement('source');
+                    sourceEl.src = blobUrl;
+                    sourceEl.type = 'audio/webm';
+                    audioEl.appendChild(sourceEl);
+                    document.body.appendChild(audioEl);
+                    document.body.appendChild(downloadEl);
+                }
+                
         
                 const mediaRecorder = new MediaRecorder(stream)
                     event.target.addEventListener("mouseup", mouseUsEvent)
@@ -45,7 +62,7 @@ const Recorder = ({
                     mediaRecorder.addEventListener("stop" , () => {
                         clearInterval(timePassing)
                         setpassedTime(0)
-                        const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' })
+                        const blob = new Blob(chunks, { 'type': 'audio/mp4; codecs=opus' })
                         
                         chunks = []
                         stream.getAudioTracks().forEach((track) => track.stop())
@@ -53,8 +70,11 @@ const Recorder = ({
                         if(blob.size < 16769) {
                             return
                         }
+                        var url = URL.createObjectURL(blob);
+                        console.log(url)
+                        console.log(blob)
                         succesRecord(blob)
-                        event.target.removeEventListener("mouseup", mouseUsEvent)
+
                     })
                     mediaRecorder.start()
         }
