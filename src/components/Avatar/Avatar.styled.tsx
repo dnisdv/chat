@@ -38,7 +38,7 @@ export const OnlineStatus = styled.div`
     background-color: #46CA63;
     display:block;
     position:absolute;
-    z-index:1111111;
+    z-index:4;
     bottom:5%;
     right:6%;
     border-radius:50%;

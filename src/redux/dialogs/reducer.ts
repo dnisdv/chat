@@ -23,7 +23,7 @@ export const initialState: DialogState = {
   
 };
 
-export default (state = initialState, action: DialogActionTypes): DialogState => {
+const reducer = (state = initialState, action: DialogActionTypes): DialogState => {
   switch (action.type) {
         case DIALOG_SET_CURRENT:
           return{
@@ -75,3 +75,6 @@ export default (state = initialState, action: DialogActionTypes): DialogState =>
       return state;
   }
 };
+
+
+export default reducer

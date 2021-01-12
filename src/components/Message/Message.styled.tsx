@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components'
+import styled from 'styled-components'
 import {IsMeProps} from './Message'
 
 type MessageWrapperProps ={
@@ -51,6 +51,9 @@ export const MessageText = styled.span<{
     @media (min-width: 560px) {
         font-size:16px;
     };
+    & > .emoji-mart-emoji{
+        height:21px;
+    }
 `
 
 

@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components'
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
     margin:24px 34px;
@@ -95,54 +95,6 @@ export const FileUpload = styled.input`
 export const AttachmentLabel = styled.label`
     padding:2px;
     cursor:pointer;
-`
-export const RecordingWrapper = styled.div`
-    box-sizing:border-box;
-    flex:1;
-    border:none;
-    margin-left:24px;
-    margin-right:15px;
-    min-height:55px;
-    display:flex;
-    align-items:center;
-    position:absolute;
-    bottom:0px;
-    z-index:99;
-`
-const moveInLeft = keyframes`
-    0%{
-        box-shadow: 0px 0px 2px 0px rgba(173,0,0,.2);
-    }
-    65%{
-        box-shadow: 0px 0px 2px 6px rgba(173,0,0,.2);
-    }
-    90%{
-        box-shadow: 0px 0px 2px 6px rgba(173,0,0,0);
-    }
-`
-export const RecordingTime = styled.span`
-`
-
-
-export const RecordingIcon = styled.div`
-    width: 15px;
-    height: 15px;
-    font-size: 0;
-    background-color: red;
-    border: 0;
-    border-radius: 35px;
-    outline: none; 
-
-    animation-name: ${moveInLeft};
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    margin-left:20px;
-
-`
-
-export const RecordTitle = styled.span`
-    margin-left:20px;
 `
 
 export const Controls = styled.div`

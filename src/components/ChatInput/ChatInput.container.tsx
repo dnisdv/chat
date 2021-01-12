@@ -16,9 +16,7 @@ export type EventTargetFiles = React.ChangeEvent<HTMLInputElement> & {
 const ChatInput = () => {
     const [EmojiStatus, setEmojiStatus] = useState<boolean>(false)
     const [InputValue, setInputValue] = useState<string>("")
-    const [isRecording, setisRecording] = useState<boolean>(false)
     const [AttachmentImages, setAttachmentImages] = useState<AttachmentImagesType[]>([])
-    const [passedTime, setpassedTime] = useState<number>(0)
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
     const selectedUser = useSelector((state: {dialog:DialogState}) => state.dialog.selectedUser)
     const currentDialog = useSelector((state: {dialog:DialogState}) => state.dialog.currentDialog)
@@ -78,15 +76,15 @@ const ChatInput = () => {
     const deleteAttachment = ({id}:AttachmentImagesType) => {
         setAttachmentImages((prevProps:AttachmentImagesType[]) => prevProps.filter( (i:AttachmentImagesType) => i.id !== id))
     }
-
     const onSend = () => {
-        if(/([^\s])/.test(InputValue) || AttachmentImages && AttachmentImages.length > 0 ){
+        if(/([^\s])/.test(InputValue) || (AttachmentImages && AttachmentImages.length > 0) ){
             if(selectedUser){
                 dispatch(createDialogs_sendMessage(selectedUser._id, InputValue, AttachmentImages))
                 setAttachmentImages([])
             }else if(currentDialog){
                 dispatch(sendMessagetoDialog(currentDialog._id, InputValue, AttachmentImages))
                 setAttachmentImages([])
+
             }
             setInputValue("")
         }else{
@@ -98,22 +96,10 @@ const ChatInput = () => {
         if(currentDialog && me){
             socket.emit('DIALOGS:TYPING', { dialogId: currentDialog._id, userId: me._id });
         }
-
         if(e.key === "Enter"){
             e.preventDefault()
             onSend()
         }
-    }
-
-    function PassedTimeFormat()  {
-        var sec_num:number = parseInt(passedTime.toString(), 10);
-        var minutes:string | number = Math.floor((sec_num) / 60);
-        var seconds:number | string = sec_num - (minutes * 60);
-    
-        if (minutes < 10) {minutes = "0"+minutes;}
-        if (seconds < 10) {seconds = "0"+seconds;}
-
-        return +minutes+':'+seconds;
     }
 
     const autoResize = (e:React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -126,10 +112,7 @@ const ChatInput = () => {
         {selectedUser || currentDialog ? <ChatInputComponent
             AttachmentImages={AttachmentImages}
             deleteAttachment={deleteAttachment}
-            isRecording={isRecording}
             sendHandle={onSend}
-            voiceSend={onSend}
-            recordingPassedTime={PassedTimeFormat}
             autoResize={autoResize}
             changeInputValue={changeInputValue}
             toogleEmojiOpen={toogleEmojiOpen}
@@ -137,10 +120,7 @@ const ChatInput = () => {
             onSend={onSend}
             selectEmoji={selectEmoji}
             inputValue={InputValue}
-            PassedTimeFormat={PassedTimeFormat}
             uploadAttachmentHandle={uploadAttachmentHandle}
-            setisRecording={setisRecording}
-            setpassedTime={setpassedTime}
             textAreaRef={textAreaRef}
             KeyPressHandle={KeyPressHandle}
         /> :""}

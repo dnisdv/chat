@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
     display:flex;
@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
     width:100%;
     padding:0 10px;
     box-sizing: border-box;
-
 `
 
 export const SideMenu = styled.div<{
@@ -58,4 +57,5 @@ export const MessagesMenu = styled.div<{
         left: ${({isSelect}) => isSelect ? "0%" : "100%"};
     };
     transition:.4s;
+    z-index:99999999;
 `

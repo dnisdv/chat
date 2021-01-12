@@ -31,7 +31,7 @@ const Dialog = (props:DialogProps) => {
                 toggleIsTyping();
             }
         });
-    }, [])
+    }, [me?._id, props.dialog._id])
     return(
         <DialogComponent 
             isTyping={isTyping}

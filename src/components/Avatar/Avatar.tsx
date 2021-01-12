@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import generateAvatarColor from '../../lib/generateAvatar'
 import {
     AvatarWrapper,
@@ -7,7 +7,6 @@ import {
     AvatarImageWrapper,
     AvatarNoImage
 } from './Avatar.styled'
-import axios from '../../core/axios'
 
 export type AvatarProps = {
     srcImage?:string | null,

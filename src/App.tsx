@@ -10,8 +10,6 @@ import {
   Redirect
 } from "react-router-dom";
 import { UserState } from './redux/user/types'
-import socket from './core/socket'
-import { fetchDialogs } from './redux/dialogs/actions'
 
 const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -19,7 +17,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetch_User())
-  }, []);
+  }, [dispatch]);
 
 
   return (

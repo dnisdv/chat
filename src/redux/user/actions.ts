@@ -30,9 +30,11 @@ export const fetch_User = (history?:History): ThunkAction<Promise<void>, {}, {},
           type:SET_USER_DATA,
           payload:res.data
         })
-        history!.push('/')
-      }).catch(() => {
-
+         history && history.push('/')
+      }).catch((e) => {
+        dispatch({
+          type:USER_LOGOUT
+        })
       })
 
   }

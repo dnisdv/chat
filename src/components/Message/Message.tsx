@@ -61,7 +61,9 @@ const Message = ({text, user, isMe, readed, attachments, createdAt,}: MessagePro
 
             <MessageBubble attachment={!!(attachments)} isMe={isMe} >
                     {attachments ?<AttachmentsWrapper isText={!!(text)} >{attachments.map( (i) =>  {
-                            return <AttachmentImage key={i._id} isSingle={attachments.length === 1} src={"/" + i.path}  />
+                            return (
+                                    <AttachmentImage key={i._id} isSingle={attachments.length === 1} src={i.path}  />
+                            )
                     })}</AttachmentsWrapper>
                     : ""}
 

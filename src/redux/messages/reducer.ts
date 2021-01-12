@@ -13,7 +13,7 @@ export const initialState: any = {
   isLoading: false,
 };
 
-export default (state = initialState, action: messagesAction): messageState => {
+const reducer = (state = initialState, action: messagesAction): messageState => {
   switch (action.type) {
         case MESSAGES_SET:
           return{
@@ -45,3 +45,5 @@ export default (state = initialState, action: messagesAction): messageState => {
       return state;
   }
 };
+
+export default reducer

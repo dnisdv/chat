@@ -10,10 +10,7 @@ import {InputText,
     PreviewAttachment,
     FileUpload,
     AttachmentLabel,
-    RecordingWrapper,
-    RecordingIcon,
-    RecordingTime,
-    RecordTitle,
+
     Controls,
     LeftColumn,
     PreviewAttachmentWrapper,
@@ -28,8 +25,6 @@ import AttachmentIcon from './Assets/Attachment.svg'
 import DeleteIcon from './Assets/remove.svg'
 import { Picker } from 'emoji-mart'
 import {EventTargetFiles} from './ChatInput.container'
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 export type AttachmentImagesType = {
     id:number,
@@ -41,10 +36,7 @@ export type AttachmentImagesType = {
 export type ChatInputProps = {
     AttachmentImages: AttachmentImagesType[],
     deleteAttachment: (i:AttachmentImagesType) => void,
-    isRecording:boolean,
     sendHandle: () => void,
-    voiceSend: (blob:Blob) => void,
-    recordingPassedTime:() => string,
     autoResize:(e:React.KeyboardEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLTextAreaElement>) => void,
     changeInputValue:(e:React.ChangeEvent<HTMLTextAreaElement>) => void,
     toogleEmojiOpen:() => void,
@@ -53,9 +45,6 @@ export type ChatInputProps = {
     uploadAttachmentHandle:(e:EventTargetFiles) => void,
     selectEmoji:(data:any) => void,
     inputValue:string,
-    PassedTimeFormat:() => string,
-    setisRecording:React.Dispatch<React.SetStateAction<boolean>>,
-    setpassedTime:React.Dispatch<React.SetStateAction<number>>,
     textAreaRef:React.MutableRefObject<HTMLTextAreaElement | null>
     KeyPressHandle:(e: React.KeyboardEvent<HTMLTextAreaElement>) => void
 }
@@ -63,8 +52,6 @@ export type ChatInputProps = {
 const ChatInput = ({
     AttachmentImages,
     deleteAttachment,
-    isRecording,
-    recordingPassedTime,
     autoResize,
     changeInputValue,
     toogleEmojiOpen,
@@ -73,8 +60,6 @@ const ChatInput = ({
     uploadAttachmentHandle,
     selectEmoji,
     inputValue,
-    setisRecording,
-    setpassedTime,
     textAreaRef,
     KeyPressHandle
 }:ChatInputProps) => {
@@ -109,8 +94,8 @@ const ChatInput = ({
                                 ref={textAreaRef} 
                                 onKeyDown={autoResize} 
                                 onChange={changeInputValue} 
-                                value={isRecording ? "" : inputValue} 
-                                placeholder={isRecording ? "" :"Type your message"} />
+                                value={inputValue} 
+                                placeholder={"Type your message"} />
                 </LeftColumn>
                 <Controls>
                     <EmojiControl >
@@ -122,7 +107,7 @@ const ChatInput = ({
                         <AttachmentLabel htmlFor="Upload8fc44" ><Attachment src={AttachmentIcon} /></AttachmentLabel>
                     </AttachmentWrapper>
                     <SendButton notEmpty={(inputValue && inputValue.length > 0 ) || (AttachmentImages && AttachmentImages.length > 0)} onClick={onSend}>
-                        <img src={SendIcon} />
+                        <img src={SendIcon} alt="send" />
                     </SendButton>
                 </Controls>
         </ChatWrapper>

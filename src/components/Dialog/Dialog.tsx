@@ -9,7 +9,6 @@ import {
     NotReaded,
     LastMessageWrapper,
     LastMessageImage,
-    LastMessageAudio,
     Typing,
     TypingDot,
     TypingWrapper,
@@ -17,7 +16,6 @@ import {
 } from './Dialog.styled'
 import imagePlaceholder from './Assets/imagePlaceholder.png'
 import Avatar from '../Avatar/Avatar'
-import SoundVawe from '../../Assets/img/sound-waves.svg'
 import { getHours, getMinutes, formatDistanceStrict, isToday } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 import { Dialog as DialogType } from '../../redux/dialogs/types'
@@ -67,7 +65,15 @@ export type DialogProps = {
     isTyping?:boolean
 }
 
-const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dialog, isTyping}: DialogProps) => {
+const Dialog  = ({
+     user,
+     lastMessage, 
+     notReadedCount, 
+     active=false, 
+     onClick, 
+     dialog, 
+     isTyping
+}: DialogProps) => {
     return(
         <Wrapper onClick={() => onClick && onClick(dialog)} active={active}>
             <Avatar 
@@ -104,7 +110,6 @@ const Dialog  = ({user, lastMessage, notReadedCount, active=false, onClick, dial
                         <LastMessage>
                         {lastMessage.fromMe ? <span>You: </span>: ""}
                         {!lastMessage ? "Error":
-                            lastMessage.audio ? <LastMessageAudio src={SoundVawe} /> : 
                             lastMessage.attachments && lastMessage.attachments.length > 0  ? <LastMessageImage src={imagePlaceholder} /> :
 
                             reactStringReplace(lastMessage.message, /:(.+?):/g, (match, i) => (

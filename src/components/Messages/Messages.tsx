@@ -2,7 +2,6 @@ import React,{useRef, useEffect} from 'react'
 import Message, {MessageProps} from '../Message/Message'
 import NoItemsIcon from './Assets/MailBox.svg' 
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Dialog } from '../../redux/dialogs/types'
 import { Userdata } from '../../redux/user/types'
 
@@ -34,12 +33,12 @@ const Messages = ({items, loading=false, isTyping, currentDialog, user}: Message
     const scrollRef = useRef<any>(null)
     useEffect( () =>{
         scrollRef.current && scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
-    }, [scrollRef, scrollRef.current, items])
+    }, [scrollRef, items])
 
     return(
         <Wrapper  isItems={!!(items && items.length > 1)}>
             {loading ? "" :
-                items && items.length > 0 ? 
+                currentDialog && items && items.length > 0 ? 
                 <MessagesWrapper ref={scrollRef}>
                     {items.map( (i) => {
                         return(

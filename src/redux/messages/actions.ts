@@ -1,13 +1,11 @@
 import axios from '../../core/axios'
 import {ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {Action, ActionCreator, Dispatch} from 'redux';
-import { fetchDialogs } from '../dialogs/actions'
 import {
   MESSAGES_SET,
   messagesAction,
   MESSAGES_ADD,
   messageState,
-  MessageType,
   MESSAGES_READED_STATUS,
   MESSAGES_CLEAR
 } from "./types"
@@ -21,10 +19,6 @@ type AttachmentImagesType = {
 
 export const getMessages = (dialogId:string): ThunkAction<Promise<void>, {}, {}, messagesAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, messagesAction>, getState:any): Promise<void> => {
-
-    const currentDialog = getState().dialog.currentDialog
-    const meId = getState().user.data._id
-
       return axios.get(`/messages?dialog=${dialogId}`).then((res) => {
           dispatch({
               type:MESSAGES_SET,
@@ -37,11 +31,8 @@ export const getMessages = (dialogId:string): ThunkAction<Promise<void>, {}, {},
 
 
 export const sendMessagetoDialog = (dialogId:string, text:string, attachments?:AttachmentImagesType[]): ThunkAction<Promise<void>, {}, {}, messagesAction> => {
-  return async (dispatch: ThunkDispatch<{}, {}, messagesAction>, getState:any): Promise<void> => {
-    const currentDialog = getState().dialog.currentDialog
-
+  return async (): Promise<void> => {
       const formdata = new FormData()
-
       attachments && attachments.forEach((i) => {
         formdata.append("photos", i.file)
       })
@@ -50,7 +41,6 @@ export const sendMessagetoDialog = (dialogId:string, text:string, attachments?:A
 
       return axios.post("/messages",formdata).then((res) => {
       }).catch((e) => {
-
         console.log(e)
       })
   }
@@ -71,42 +61,12 @@ export const messageUpdateReadStatus: ActionCreator<ThunkAction<{}, messageState
                 userId,
                 dialogId: dialogId,
             }})
-            console.log({
-              userId,
-              dialogId
-            })
       }
       };
     }
   };
 };
 
-
-export const messageUpdateReadStatus2: ActionCreator<ThunkAction<{}, messageState, {}, messagesAction>> = (
-  {userId, dialogId}
-) : any => {
-
-  return (dispatch: Dispatch<messagesAction>, getState:any):  void => {
-    const meId = getState().user.data._id
-      if( userId !== meId){
-        const currentDialog = getState().dialog.currentDialog
-      if(currentDialog){
-        if (currentDialog._id === dialogId) {
-            dispatch({
-              type: MESSAGES_READED_STATUS,
-              payload: {
-                userId,
-                dialogId: dialogId,
-            }})
-            console.log({
-              userId,
-              dialogId
-            })
-      }
-      };
-    }
-  };
-};
 
 export const messageUpdateNotReadCount: ActionCreator<ThunkAction<{}, messageState, {}, messagesAction>> = (
   {userId, dialogId}

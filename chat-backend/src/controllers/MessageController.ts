@@ -27,8 +27,6 @@ class MessageController {
           userId,
           dialogId,
         });
-        // this.updateNotReadCount(dialogId)
-
     }catch(e){
       res.status(500).json({
       status: "error",
@@ -80,7 +78,7 @@ class MessageController {
 
   create = async (req: any, res: express.Response): Promise<any> => {
     const userId: string = req.user._id;
-
+    
     const postData = {
       text: req.body.text,
       dialog: req.body.dialog_id,

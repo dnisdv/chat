@@ -60,14 +60,7 @@ export const LastMessage = styled.p`
 export const LastMessageImage = styled.img`
     width:15px;
     height:15px;
-    display:block;
-    margin-left:10px;
-`
-
-export const LastMessageAudio = styled.img`
-    width:45px;
-    height:20px;
-    display:block;
+    display:inline;
     margin-left:0px;
 `
 

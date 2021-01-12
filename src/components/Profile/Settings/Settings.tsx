@@ -9,7 +9,6 @@ import {
     SettingItem,
     ItemValue,
     AvatarWrapper,
-    FullName,
     LogoutButton,
     CloseIcon,
     MainDataWrapper,

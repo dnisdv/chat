@@ -1,5 +1,5 @@
 import React,{useState, useRef, useEffect} from 'react'
-import SearchComponent,{ SearchProps} from './Search'
+import SearchComponent from './Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchDialogs, clearFoundDialogs } from '../../redux/dialogs/actions'
 import { DialogState } from '../../redux/dialogs/types'
@@ -16,6 +16,7 @@ const Search = ({}: SearchContainerProps) => {
     useEffect(() => {
         setSearchValue("")
     }, [SelectedUser])
+    
     const onUserSearch = (value:string) => {
         if(value !== ""){
             dispatch(searchDialogs(value))

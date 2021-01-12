@@ -63,7 +63,7 @@ interface SET_USER_AUTH_ACTION{
     type: typeof SET_USER_AUTH,
     payload:boolean
 }
-interface USER_LOADING{
+interface USER_LOADING_ACTION{
     type: typeof USER_LOADING,
 }
 
@@ -81,7 +81,7 @@ export type UserActionTypes =
     LoginUserAction |
     SET_USER_DATA_ACTION |
     SET_USER_AUTH_ACTION |
-    USER_LOADING |
+    USER_LOADING_ACTION |
     RegisterUserErrorAction |
     LoginUserErrorAction |
     USER_LOGOUT_ACTION

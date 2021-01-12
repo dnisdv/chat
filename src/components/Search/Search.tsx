@@ -1,5 +1,4 @@
 import React from 'react'
-import {useState, useRef} from "react"
 import {Wrapper, SearchInput, SearchIMG,CloseIMG, CloseIMGWrapper} from './Search.styled'
 import SearchIcon from './Assets/search.svg'
 import CloseIcon from './Assets/close.svg'

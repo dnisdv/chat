@@ -5,7 +5,6 @@ import { DialogState, Dialog as DialogType } from '../../redux/dialogs/types'
 import { UserState } from '../../redux/user/types'
 import socket from '../../core/socket'
 import { fetchDialogs, setDialogNotReadCount } from '../../redux/dialogs/actions'
-import { messageUpdateReadStatus, messageUpdateNotReadCount } from '../../redux/messages/actions'
 
 const Dialogs = () => {
     const dispatch = useDispatch()
@@ -17,7 +16,7 @@ const Dialogs = () => {
             dispatch(setDialogNotReadCount(dialogId, count))
         }
         const newMessage = (data:any) => {
-            if(me && data.dialog.author === me._id || me && data.dialog.partner === me._id){
+            if((me && data.dialog.author === me._id )|| (me && data.dialog.partner === me._id)){
                 dispatch(fetchDialogs())
             }
         }
@@ -31,7 +30,7 @@ const Dialogs = () => {
           socket.removeListener('SERVER:NEW_MESSAGE', newMessage);
           socket.removeListener('SERVER:MESSAGES_NOT_READED_COUNT', readcount)
         };
-    }, []);
+    }, [dispatch, me]);
 
     if(!me) {
         return <></>
