@@ -67,7 +67,7 @@ return async (dispatch: ThunkDispatch<{}, {}, UserActionTypes>): Promise<void> =
         payload:res.data
       })
     }).catch((e) => {
-      console.log(e)
+      console.log(e.response)
     })
 }
 }
@@ -94,7 +94,6 @@ export const User_Login = (
         })
         dispatch(fetch_User(history));
       }).catch((e) => {
-        console.log(e)
         dispatch({
           type:LOGIN_ERROR,
           payload:e.response.data.message

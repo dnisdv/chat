@@ -18,6 +18,7 @@ export default (
   const token: string | null =
     "token" in req.headers ? (req.headers.token as string) : null;
   if (token) {
+    console.log(token)
     verifyJWTToken(token)
       .then((user: DecodedData | null) => {
         if (user) {
