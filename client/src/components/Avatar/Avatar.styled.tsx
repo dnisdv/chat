@@ -33,6 +33,7 @@ export const AvatarImage = styled.img<AvatarImageProps>`
 `
 
 export const OnlineStatus = styled.div`
+    border:1px solid white;
     width:17%;
     height:17%;
     background-color: #46CA63;

@@ -23,7 +23,7 @@ export const InputText = styled.textarea`
     min-height:55px;
     width:100%; 
     height:55px;
-    padding:18px 12px 18px 12px;
+    padding:20px 12px 18px 12px;
     max-height:250px;
     resize:none;
     font-family:inherit;

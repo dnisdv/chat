@@ -23,8 +23,6 @@ const Messages = () => {
         currentDialog?._id && dispatch(getMessages(currentDialog._id))
     }, [currentDialog, scrollRef, wrapperRef, dispatch])
 
-    // TODO DO SOMETHING WITH THIS
-    // eslint-disable-next-line
     const toggleIsTyping = () => {
         setIsTyping(true);
         clearInterval(typingTimeoutId);

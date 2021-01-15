@@ -6,7 +6,7 @@ import Search from '../../components/Search/Search.container'
 import ChatInput from '../../components/ChatInput/ChatInput.container'
 import Profile from '../../components/Profile/Profile.container'
 import Interlocutor from '../../components/Interlocutor/Interlocutor.container'
-import { searchDialogs, clearFoundDialogs, fetchDialogs } from '../../redux/dialogs/actions'
+import { fetchDialogs } from '../../redux/dialogs/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { DialogState } from '../../redux/dialogs/types'
 import FoundUsers from '../../components/FoundUsers/FoundUsers.container'
@@ -20,14 +20,6 @@ const Home = () => {
 
     const dispatch = useDispatch()
 
-    const onUserSearch = (value:string) => {
-        if(value !== ""){
-            dispatch(searchDialogs(value))
-        }else{
-            dispatch(clearFoundDialogs())
-        }
-    }
-
     useEffect(() => {
         dispatch(fetchDialogs())
     }, [dispatch])
@@ -39,7 +31,7 @@ const Home = () => {
         <Wrapper>
             <SideMenu isSelect={!!(currentDialog || selectedUser)}>
                 <Profile />
-                <Search onChange={onUserSearch} />
+                <Search />
                 {foundUsers  ? <FoundUsers /> : <Dialogs />}
             </SideMenu>
 

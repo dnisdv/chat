@@ -135,7 +135,7 @@ export const SettingsWrapper = styled.div`
     left:0;
     top:0;
     height:100vh;
-    overflow:hidden;
+    overflow:auto;
     background-color:rgb(0,0,0,0.3);
     position:absolute;
     z-index:999999999;

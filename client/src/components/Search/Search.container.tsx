@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { searchDialogs, clearFoundDialogs } from '../../redux/dialogs/actions'
 import { DialogState } from '../../redux/dialogs/types'
 
-type SearchContainerProps = {
-    onChange?:(value:string) => void,
-}
-const Search = ({}: SearchContainerProps) => {
+
+const Search = () => {
     const [searchValue, setSearchValue] = useState<string>("")
     const SearchInputRef = useRef<HTMLInputElement | null>(null)
     const dispatch = useDispatch()

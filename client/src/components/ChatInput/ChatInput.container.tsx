@@ -91,6 +91,9 @@ const ChatInput = () => {
             setInputValue("")
         }
         setEmojiStatus(false)
+        if(textAreaRef.current){
+            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
+        }
     }
     const KeyPressHandle = (e:React.KeyboardEvent<HTMLTextAreaElement>) => {
         if(currentDialog && me){

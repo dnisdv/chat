@@ -80,7 +80,7 @@ const Message = ({text, user, isMe, readed, attachments, createdAt,}: MessagePro
             </MessageBubble>
             {/* } */}
             <TimeWrapper isMe={isMe} >
-                    {formatDistance(new Date(), new Date(), { addSuffix: true, locale: enUS })}
+                    {formatDistance(Date.parse(createdAt), new Date(), { addSuffix: true, locale: enUS })}
             </TimeWrapper>
 
         </MessageWrapper>

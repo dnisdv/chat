@@ -1,7 +1,8 @@
-import React,{useRef, useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import Message, {MessageProps} from '../Message/Message'
 import NoItemsIcon from './Assets/MailBox.svg' 
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from "react-perfect-scrollbar"
 import { Dialog } from '../../redux/dialogs/types'
 import { Userdata } from '../../redux/user/types'
 
@@ -30,16 +31,24 @@ type MessagesProps = {
 }
 
 const Messages = ({items, loading=false, isTyping, currentDialog, user}: MessagesProps) => {
-    const scrollRef = useRef<any>(null)
+    const [scrollEl, setScrollEl] = useState<any>(null);
+
     useEffect( () =>{
-        scrollRef.current && scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
-    }, [scrollRef, items])
+        if(scrollEl){
+            scrollEl && scrollEl.scrollTo(0, scrollEl.scrollHeight);
+        }
+    }, [scrollEl, items])
 
     return(
         <Wrapper  isItems={!!(items && items.length > 1)}>
             {loading ? "" :
                 currentDialog && items && items.length > 0 ? 
-                <MessagesWrapper ref={scrollRef}>
+                <MessagesWrapper>
+                    <PerfectScrollbar
+                    containerRef={(ref:any) => {
+                        setScrollEl(ref);
+                        }}
+                    >
                     {items.map( (i) => {
                         return(
                             <MessageWrapper key={i.id}>
@@ -55,6 +64,8 @@ const Messages = ({items, loading=false, isTyping, currentDialog, user}: Message
                             </MessageWrapper>
                         )
                     })}
+                    </PerfectScrollbar>
+
                 </MessagesWrapper>
             :
             currentDialog ? "" :

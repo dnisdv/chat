@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import generateAvatarColor from '../../lib/generateAvatar'
 import {
     AvatarWrapper,
@@ -7,6 +7,8 @@ import {
     AvatarImageWrapper,
     AvatarNoImage
 } from './Avatar.styled'
+import axios from "../../core/axios"
+
 
 export type AvatarProps = {
     srcImage?:string | null,
@@ -19,10 +21,22 @@ export type AvatarProps = {
     noimageColor?:string,
 }
 const Avatar = ({size = 50, isOnline, srcImage, user}: AvatarProps) => {
+    const [isAvatarExist, setisAvatarExist] = useState(true)
+    useEffect(() => {
+        if(srcImage){
+            axios.get(srcImage).then(() => {
+                setisAvatarExist(true)
+            })
+            .catch((e) =>{
+                setisAvatarExist(false)
+            })
+        }
+    }, [srcImage])
+
     return(
         <AvatarWrapper>
             <AvatarImageWrapper>
-                {srcImage ? 
+                {srcImage && isAvatarExist ? 
                     <AvatarImage 
                         size={size} 
                         width={size} 

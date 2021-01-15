@@ -161,7 +161,11 @@ export const ErrorFeedback = styled.span`
     transform:translateY(-50%) translateX(100%) ;
     right:-20px;
     @media (max-width: 919px) {
-        position:relative;
+        top:119%;
+        left:0px;
+        transform:translateY(-50%) translateX(9%) ;
+        right:0px;
+
     }
 `
 
